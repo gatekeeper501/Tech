@@ -3,10 +3,9 @@ import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 
 export default function App() {
   return (
-    // ScrollView allows the page to scroll if the content gets too long
     <ScrollView contentContainerStyle={styles.container}>
       
-      {/* 1. THE TOP NAVIGATION BAR */}
+      {/* TOP NAVIGATION BAR */}
       <View style={styles.navBar}>
         <Text style={styles.logoText}>Tech Stuff</Text>
         <View style={styles.navLinks}>
@@ -17,14 +16,13 @@ export default function App() {
         </View>
       </View>
 
-      {/* 2. THE MAIN IMAGE */}
-      {/* Note: I am using a placeholder image link here. You will replace the uri with your actual image later */}
+      {/* MAIN IMAGE */}
       <Image 
         source={{ uri: 'https://picsum.photos/800/400' }} 
         style={styles.heroImage} 
       />
 
-      {/* 3. THE MAIN HEADLINE */}
+      {/* MAIN HEADLINE */}
       <Text style={styles.headline}>
         Empowering Campus & Community{"\n"}Through Innovation
       </Text>
@@ -33,7 +31,7 @@ export default function App() {
   );
 }
 
-// 4. THE STYLING (Similar to CSS)
+// STYLING
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -73,4 +71,3 @@ const styles = StyleSheet.create({
     color: '#333',
   },
 });
-
