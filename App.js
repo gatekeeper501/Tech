@@ -13,7 +13,7 @@ export default function App() {
           <Text style={styles.subTagline}>Device repair, IT support, and programming growth based in Bryant, Arkansas.</Text>
           <TouchableOpacity 
             style={styles.btnPrimary}
-            onPress={() => Linking.openURL('mailto:corneliuscornell@gmail.com')}
+            onPress={() => Linking.openURL('mailto:ccornelius@ualr.edu')}
           >
             <Text style={styles.btnText}>Book a Repair / Contact Me</Text>
           </TouchableOpacity>
@@ -47,7 +47,7 @@ export default function App() {
           </View>
           
           <Text style={styles.boldText}>Affordable pricing. Quick turnaround. Local service.</Text>
-          <Text style={styles.paragraph}>📞 Call or Email: 501-507-0413</Text>
+          <Text style={styles.paragraph}>📞 Call or text: 501-916-3011</Text>
           <Text style={styles.paragraph}>📍 Location: Bryant, Arkansas</Text>
         </View>
       </View>
