@@ -191,7 +191,7 @@ export default function App() {
 
       {/* Footer */}
       <View style={styles.footer}>
-        <Text style={styles.footerText}>© 2026 Cornell Cornelius — Bryant, Arkansas.</Text>
+        <Text style={styles.footerText}>© 2026 Cornell Cornelius — Benton, Arkansas.</Text>
       </View>
 
     </ScrollView>
