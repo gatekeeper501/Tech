@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking, TextInput, ActivityIndicator, Alert } from 'react-native';
 
 export default function App() {
-  // --- STATE FOR THE FORM ---
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [deviceCategory, setDeviceCategory] = useState('Phone'); // Default multi-choice
+  const [deviceCategory, setDeviceCategory] = useState('Phone');
   const [deviceModel, setDeviceModel] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,10 +18,16 @@ export default function App() {
     { label: '⚡ Other Electronics', value: 'Other Electronics' }
   ];
 
-  // --- REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT URL ---
+  // Quick-select preset models based on category
+  const presetModels = {
+    Phone: ['iPhone 17 Pro Max', 'iPhone 16 Pro', 'Galaxy S Series'],
+    Tablet: ['13-inch iPad Pro', 'iPad Air', 'Galaxy Tab'],
+    Computer: ['MacBook Pro', 'Dell Latitude', 'Custom Windows PC'],
+    Other Electronics: ['Trek E-Bike Battery', 'DVR Security System', 'J-Tech HDMI Extender']
+  };
+
   const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwLSk2w_Z2GEfo4kWzUmTg3HyLKvZLBKRf2Nj-XYIEoy4mGlQK2awAg73Hn8-bMujg4/exec';
 
-  // --- FUNCTION TO SEND DATA TO GOOGLE SHEETS ---
   const submitForm = async () => {
     if (!name || !email || !deviceModel || !message) {
       alert('Please fill out your Name, Email, Device Model, and Message.');
@@ -32,14 +37,16 @@ export default function App() {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
+    // Generate unique service ticket ID (e.g., TC-4921)
+    const ticketId = 'TC-' + Math.floor(1000 + Math.random() * 9000);
+
     try {
       await fetch(WEBHOOK_URL, {
         method: 'POST',
-        mode: 'no-cors', // Bypasses browser security blocks for Google Scripts
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ticketId: ticketId,
           name: name,
           email: email,
           phone: phone,
@@ -49,13 +56,12 @@ export default function App() {
         })
       });
 
-      // Clear the form on success
       setName('');
       setEmail('');
       setPhone('');
       setDeviceModel('');
       setMessage('');
-      setSubmitStatus('Success! Your repair request has been sent. I will be in touch shortly.');
+      setSubmitStatus(`Success! Service Ticket #${ticketId} created. I will be in touch shortly.`);
       
     } catch (error) {
       setSubmitStatus('Oops! Something went wrong. Please email me directly instead.');
@@ -143,7 +149,7 @@ export default function App() {
       <View style={styles.section}>
         <View style={styles.container}>
           <Text style={styles.h2}>📝 Request a Repair Quote</Text>
-          <Text style={styles.paragraph}>Select your device category, provide your details, and describe your issue below.</Text>
+          <Text style={styles.paragraph}>Select your device category, choose or type your model, and describe your issue below.</Text>
           
           <View style={styles.formCard}>
             <Text style={styles.inputLabel}>Name *</Text>
@@ -176,14 +182,17 @@ export default function App() {
               onChangeText={setPhone}
             />
 
-            {/* MULTI-CHOICE CATEGORY SELECTOR */}
+            {/* CATEGORY SELECTOR */}
             <Text style={styles.inputLabel}>Device Category *</Text>
             <View style={styles.categoryGrid}>
               {categories.map((cat) => (
                 <TouchableOpacity 
                   key={cat.value} 
                   style={[styles.categoryButton, deviceCategory === cat.value && styles.selectedCategory]} 
-                  onPress={() => setDeviceCategory(cat.value)}
+                  onPress={() => {
+                    setDeviceCategory(cat.value);
+                    setDeviceModel(''); // Reset model when category changes
+                  }}
                 >
                   <Text style={[styles.categoryText, deviceCategory === cat.value && styles.selectedCategoryText]}>
                     {cat.label}
@@ -192,10 +201,23 @@ export default function App() {
               ))}
             </View>
 
-            <Text style={styles.inputLabel}>Device Brand & Model *</Text>
+            {/* SMART MODEL PRESETS */}
+            <Text style={styles.inputLabel}>Quick Select Model or Type Below *</Text>
+            <View style={styles.presetContainer}>
+              {presetModels[deviceCategory].map((model) => (
+                <TouchableOpacity 
+                  key={model}
+                  style={[styles.presetChip, deviceModel === model && styles.selectedPresetChip]}
+                  onPress={() => setDeviceModel(model)}
+                >
+                  <Text style={[styles.presetText, deviceModel === model && styles.selectedPresetText]}>{model}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
             <TextInput 
               style={styles.inputField} 
-              placeholder="e.g., iPhone 17 Pro Max, 13-inch iPad Pro, Dell Latitude" 
+              placeholder="e.g., iPhone 17 Pro Max, 13-inch iPad Pro..." 
               placeholderTextColor="#6b7280"
               value={deviceModel}
               onChangeText={setDeviceModel}
@@ -226,7 +248,7 @@ export default function App() {
               {isSubmitting ? (
                 <ActivityIndicator color="#0b1120" />
               ) : (
-                <Text style={styles.btnText}>Submit Repair Request</Text>
+                <Text style={styles.btnText}>Generate Repair Ticket</Text>
               )}
             </TouchableOpacity>
           </View>
@@ -263,11 +285,16 @@ const styles = StyleSheet.create({
   formCard: { backgroundColor: '#1e293b', padding: 25, borderRadius: 12, borderWidth: 1, borderColor: '#334155' },
   inputLabel: { color: '#e2e8f0', fontSize: 14, fontWeight: '600', marginBottom: 6 },
   inputField: { backgroundColor: '#0f172a', color: '#f8fafc', borderWidth: 1, borderColor: '#334155', borderRadius: 8, padding: 12, fontSize: 16, marginBottom: 20 },
-  categoryGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: 20 },
+  categoryGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: 15 },
   categoryButton: { width: '48%', padding: 12, borderWidth: 1, borderColor: '#334155', borderRadius: 8, marginBottom: 10, alignItems: 'center', backgroundColor: '#0f172a' },
   selectedCategory: { backgroundColor: '#38bdf8', borderColor: '#38bdf8' },
   categoryText: { color: '#9ca3af', fontWeight: '500' },
   selectedCategoryText: { color: '#0b1120', fontWeight: 'bold' },
+  presetContainer: { flexDirection: 'row', flexWrap: 'wrap', marginBottom: 10 },
+  presetChip: { backgroundColor: '#0f172a', borderWidth: 1, borderColor: '#334155', paddingVertical: 6, paddingHorizontal: 12, borderRadius: 15, marginRight: 8, marginBottom: 8 },
+  selectedPresetChip: { backgroundColor: '#0ea5e9', borderColor: '#0ea5e9' },
+  presetText: { color: '#9ca3af', fontSize: 13 },
+  selectedPresetText: { color: '#0b1120', fontWeight: 'bold' },
   successText: { color: '#4ade80', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
   errorText: { color: '#f87171', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
   footer: { paddingVertical: 30, borderTopWidth: 1, borderTopColor: '#374151', alignItems: 'center' },
