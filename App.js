@@ -302,7 +302,7 @@ export default function App() {
 
       {/* Footer */}
       <View style={styles.footer}>
-        <Text style={styles.footerText}>© 2026 Cornell Cornelius Jr. — Bryant, Arkansas.</Text>
+        <Text style={styles.footerText}>© 2026 Cornell Cornelius Jr. — Benton, Arkansas.</Text>
       </View>
 
       {/* FULL-SCREEN IMAGE EXPANSION MODAL */}
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
   galleryImage: { width: '100%', 
     height: 120, 
     resizeMode: 'cover',
-    backgroundColor: '#0f172a' // Fallback background while loading
+    backgroundColor: '#0f172a' 
   },
   galleryContent: { padding: 12 },
   galleryTitle: { color: '#38bdf8', fontSize: 14, fontWeight: 'bold', marginBottom: 4 },
