@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Text } from 'react-native';
 
-// Import your newly created components!
+// Importing your isolated components
 import Header from './components/Header';
 import RepairForm from './components/RepairForm';
 import Gallery from './components/Gallery';
@@ -13,7 +13,7 @@ export default function App() {
       {/* 1. Header Component */}
       <Header />
 
-      {/* 2. Static Text Content (Can also be moved to components later!) */}
+      {/* 2. Static Content Sections */}
       <View style={styles.section}>
         <View style={styles.container}>
           <Text style={styles.h2}>💡 About My Work</Text>
@@ -37,16 +37,16 @@ export default function App() {
       {/* 4. Image Gallery Component */}
       <Gallery />
 
-      {/* SYSTEM ARCHITECTURE & SKILLS DEMONSTRATED */}
+      {/* 5. Project Architecture & Engineering Skills */}
       <View style={[styles.section, styles.sectionAlt]}>
         <View style={styles.container}>
           <Text style={styles.h2}>🏗️ Project Architecture & Engineering Skills</Text>
           <Text style={styles.paragraph}>Building this cloud-based portfolio and dynamic intake system demonstrated the following full-stack competencies:</Text>
           
           <View style={styles.card}>
-            <Text style={styles.boldText}>Front-End UI State Management</Text>
+            <Text style={styles.boldText}>Front-End UI & State Management</Text>
             <Text style={styles.listItem}>• Built a cross-platform responsive interface using React Native and Flexbox grid layouts.</Text>
-            <Text style={styles.listItem}>• Managed complex component state (useState) for dynamic form routing and image modals.</Text>
+            <Text style={styles.listItem}>• Managed complex component state (useState) for dynamic form routing and interactive image modals.</Text>
 
             <View style={{marginTop: 12}}></View>
 
@@ -59,7 +59,6 @@ export default function App() {
             <Text style={styles.boldText}>Cloud DevOps & IT Infrastructure</Text>
             <Text style={styles.listItem}>• Deployed a static web application to the cloud utilizing Microsoft Azure Static Web Apps.</Text>
             <Text style={styles.listItem}>• Configured advanced DNS records (MX, TXT, CNAME) to securely route custom domains and navigate enterprise email firewalls.</Text>
-
           </View>
 
         </View>
