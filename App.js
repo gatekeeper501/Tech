@@ -26,7 +26,7 @@ export default function App() {
     try {
       await fetch(WEBHOOK_URL, {
         method: 'POST',
-        //mode: 'no-cors', // Bypasses browser security blocks for Google Scripts
+        mode: 'no-cors', // Bypasses browser security blocks for Google Scripts
         headers: {
           'Content-Type': 'application/json',
         },
