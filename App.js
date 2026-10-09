@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking, TextInput, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native';
 
 export default function App() {
   // --- STATE FOR THE FORM ---
@@ -26,9 +26,9 @@ export default function App() {
     try {
       await fetch(WEBHOOK_URL, {
         method: 'POST',
-        mode: 'no-cors', // Bypasses browser security blocks for Google Scripts
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json' 
         },
         body: JSON.stringify({
           name: name,
@@ -222,5 +222,4 @@ const styles = StyleSheet.create({
   errorText: { color: '#f87171', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
   footer: { paddingVertical: 30, borderTopWidth: 1, borderTopColor: '#374151', alignItems: 'center' },
   footerText: { color: '#9ca3af', fontSize: 14 }
-}
-);
+});
