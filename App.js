@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking, TextInput, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking, TextInput, ActivityIndicator, Alert, Image } from 'react-native';
 
 export default function App() {
   const [name, setName] = useState('');
@@ -255,6 +255,37 @@ export default function App() {
 
         </View>
       </View>
+      {/* VISUAL WORKBENCH & PROJECT GALLERY */}
+      <View style={styles.section}>
+        <View style={styles.container}>
+          <Text style={styles.h2}>📸 Workbench & Project Showcase</Text>
+          <Text style={styles.paragraph}>A visual look at my recent hardware restorations and cloud engineering work:</Text>
+          
+          <View style={styles.galleryGrid}>
+            <View style={styles.galleryCard}>
+              <Image 
+                source={{ uri: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=600&q=80' }} 
+                style={styles.galleryImage} 
+              />
+              <View style={styles.galleryContent}>
+                <Text style={styles.galleryTitle}>Precision Tablet & Phone Repair</Text>
+                <Text style={styles.galleryDesc}>Professional digitizer and LCD replacements using structural B-7000 adhesive techniques.</Text>
+              </View>
+            </View>
+
+            <View style={styles.galleryCard}>
+              <Image 
+                source={{ uri: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80' }} 
+                style={styles.galleryImage} 
+              />
+              <View style={styles.galleryContent}>
+                <Text style={styles.galleryTitle}>Cloud & App Development</Text>
+                <Text style={styles.galleryDesc}>Building responsive React Native applications deployed via Microsoft Azure and GitHub CI/CD pipelines.</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
 
       {/* Footer */}
       <View style={styles.footer}>
@@ -276,6 +307,12 @@ const styles = StyleSheet.create({
   btnPrimary: { backgroundColor: '#38bdf8', paddingVertical: 12, paddingHorizontal: 24, borderRadius: 30, alignSelf: 'center', width: '100%', alignItems: 'center' },
   btnText: { color: '#0b1120', fontWeight: 'bold', fontSize: 16 },
   section: { paddingVertical: 40 },
+  galleryGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: 10 },
+  galleryCard: { width: '48%', backgroundColor: '#1e293b', borderRadius: 12, borderWidth: 1, borderColor: '#334155', overflow: 'hidden', marginBottom: 15 },
+  galleryImage: { width: '100%', height: 140 },
+  galleryContent: { padding: 12 },
+  galleryTitle: { color: '#38bdf8', fontSize: 15, fontWeight: 'bold', marginBottom: 4 },
+  galleryDesc: { color: '#9ca3af', fontSize: 13, lineHeight: 18 },
   sectionAlt: { backgroundColor: '#111827' },
   h2: { fontSize: 26, fontWeight: 'bold', color: '#e5e7eb', marginBottom: 15 },
   paragraph: { fontSize: 16, color: '#e5e7eb', lineHeight: 24, marginBottom: 15 },
