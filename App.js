@@ -21,6 +21,8 @@ export default function App() {
     { label: '⚡ Other Electronics', value: 'Other Electronics' }
   ];
 
+  const [selectedImage, setSelectedImage] = useState(null);
+
   // Quick-select preset models based on category
   const presetModels = {
     Phone: ['iPhone 17 Pro Max', 'iPhone 16 Pro', 'Galaxy S Series'],
@@ -194,7 +196,7 @@ export default function App() {
                   style={[styles.categoryButton, deviceCategory === cat.value && styles.selectedCategory]} 
                   onPress={() => {
                     setDeviceCategory(cat.value);
-                    setDeviceModel(''); // Reset model when category changes
+                    setDeviceModel(''); 
                   }}
                 >
                   <Text style={[styles.categoryText, deviceCategory === cat.value && styles.selectedCategoryText]}>
@@ -263,36 +265,36 @@ export default function App() {
       <View style={styles.section}>
         <View style={styles.container}>
           <Text style={styles.h2}>📸 Workbench & Project Showcase</Text>
-          <Text style={styles.paragraph}>A visual look at my recent hardware restorations and cloud engineering work:</Text>
+          <Text style={styles.paragraph}>A visual look at my recent hardware restorations and cloud engineering work (Tap any photo to expand):</Text>
           
           <View style={styles.galleryGrid}>
             
             {/* Card 1: Disassembly */}
-            <View style={styles.galleryCard}>
-              <Image source={imgRepair} style={styles.galleryImage} />
+            <TouchableOpacity style={styles.galleryCard} onPress={() => setSelectedImage(imgRepair)}>
+              <Image source={imgRepair} style={styles.galleryImage} resizeMode="cover" />
               <View style={styles.galleryContent}>
                 <Text style={styles.galleryTitle}>Precision Tablet Disassembly</Text>
                 <Text style={styles.galleryDesc}>Careful internal component organization and battery replacement workflows.</Text>
               </View>
-            </View>
+            </TouchableOpacity>
 
             {/* Card 2: Boot Testing */}
-            <View style={styles.galleryCard}>
-              <Image source={imgClamp2} style={styles.galleryImage} />
+            <TouchableOpacity style={styles.galleryCard} onPress={() => setSelectedImage(imgClamp2)}>
+              <Image source={imgClamp2} style={styles.galleryImage} resizeMode="cover" />
               <View style={styles.galleryContent}>
                 <Text style={styles.galleryTitle}>Hardware Diagnostics & Boot</Text>
                 <Text style={styles.galleryDesc}>Thorough post-repair display testing and system validation.</Text>
               </View>
-            </View>
+            </TouchableOpacity>
 
             {/* Card 3: Clamp Curing */}
-            <View style={styles.galleryCard}>
-              <Image source={imgClamp} style={styles.galleryImage} />
+            <TouchableOpacity style={styles.galleryCard} onPress={() => setSelectedImage(imgClamp)}>
+              <Image source={imgClamp} style={styles.galleryImage} resizeMode="cover" />
               <View style={styles.galleryContent}>
                 <Text style={styles.galleryTitle}>Structural B-7000 Adhesion & Clamping</Text>
-                <Text style={styles.galleryDesc}>Professional screen seating and precision clamp-curing for a secure, factory-grade finish.</Text>
+                <Text style={styles.galleryDesc}>Professional screen seating and precision clamp-curing for a secure finish.</Text>
               </View>
-            </View>
+            </TouchableOpacity>
 
           </View>
         </View>
@@ -302,6 +304,20 @@ export default function App() {
       <View style={styles.footer}>
         <Text style={styles.footerText}>© 2026 Cornell Cornelius Jr. — Bryant, Arkansas.</Text>
       </View>
+
+      {/* FULL-SCREEN IMAGE EXPANSION MODAL */}
+      {selectedImage && (
+        <TouchableOpacity 
+          style={styles.modalOverlay} 
+          onPress={() => setSelectedImage(null)}
+          activeOpacity={1}
+        >
+          <View style={styles.modalContent}>
+            <Image source={selectedImage} style={styles.fullScreenImage} resizeMode="contain" />
+            <Text style={styles.closeHint}>Tap anywhere to close</Text>
+          </View>
+        </TouchableOpacity>
+      )}
 
     </ScrollView>
   );
@@ -319,11 +335,11 @@ const styles = StyleSheet.create({
   btnText: { color: '#0b1120', fontWeight: 'bold', fontSize: 16 },
   section: { paddingVertical: 40 },
   galleryGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: 10 },
-  galleryCard: { width: '48%', backgroundColor: '#1e293b', borderRadius: 12, borderWidth: 1, borderColor: '#334155', overflow: 'hidden', marginBottom: 15 },
-  galleryImage: { width: '100%', height: 140 },
+  galleryCard: { width: '31%', backgroundColor: '#1e293b', borderRadius: 12, borderWidth: 1, borderColor: '#334155', overflow: 'hidden', marginBottom: 15 },
+  galleryImage: { width: '100%', height: 120, resizeMode: 'cover' },
   galleryContent: { padding: 12 },
-  galleryTitle: { color: '#38bdf8', fontSize: 15, fontWeight: 'bold', marginBottom: 4 },
-  galleryDesc: { color: '#9ca3af', fontSize: 13, lineHeight: 18 },
+  galleryTitle: { color: '#38bdf8', fontSize: 14, fontWeight: 'bold', marginBottom: 4 },
+  galleryDesc: { color: '#9ca3af', fontSize: 12, lineHeight: 16 },
   sectionAlt: { backgroundColor: '#111827' },
   h2: { fontSize: 26, fontWeight: 'bold', color: '#e5e7eb', marginBottom: 15 },
   paragraph: { fontSize: 16, color: '#e5e7eb', lineHeight: 24, marginBottom: 15 },
@@ -346,5 +362,35 @@ const styles = StyleSheet.create({
   successText: { color: '#4ade80', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
   errorText: { color: '#f87171', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
   footer: { paddingVertical: 30, borderTopWidth: 1, borderTopColor: '#374151', alignItems: 'center' },
-  footerText: { color: '#9ca3af', fontSize: 14 }
+  footerText: { color: '#9ca3af', fontSize: 14 },
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(11, 17, 32, 0.95)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+    padding: 20
+  },
+  modalContent: {
+    width: '100%',
+    maxWidth: 800,
+    height: '80%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  fullScreenImage: {
+    width: '100%',
+    height: '90%',
+    borderRadius: 8
+  },
+  closeHint: {
+    color: '#38bdf8',
+    marginTop: 15,
+    fontSize: 16,
+    fontWeight: '600'
+  }
 });
