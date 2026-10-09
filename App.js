@@ -52,13 +52,13 @@ export default function App() {
 
             <Text style={styles.boldText}>Back-End Integration & Serverless API</Text>
             <Text style={styles.listItem}>• Engineered a serverless REST webhook using Google Apps Script to securely parse JSON POST payloads.</Text>
-            <Text style={styles.listItem}>• Automated data pipelines by routing frontend Teact Native submissions directly into a live Google Sheets database.</Text>
+            <Text style={styles.listItem}>• Automated data pipelines by routing frontend React Native submissions directly into a live Google Sheets database.</Text>
 
             <View style={{marginTop: 15}}></View>
 
             <Text style={styles.boldText}>Cloud DevOps & IT Infrastructure</Text>
-            <Text style={styles.listItem}>• Deployed a static web application to the cloud utilizing Microsoft Azure Statuc Web Apps.</Text>
-            <Text style={styles.listItem}>• Configured Cinfigured advanced DNS records (MX, TXT, CNAME) to securely route custom domains and navigate enterprise email firewalls.</Text>
+            <Text style={styles.listItem}>• Deployed a static web application to the cloud utilizing Microsoft Azure Static Web Apps.</Text>
+            <Text style={styles.listItem}>• Configured advanced DNS records (MX, TXT, CNAME) to securely route custom domains and navigate enterprise email firewalls.</Text>
 
           </View>
 
