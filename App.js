@@ -312,6 +312,33 @@ export default function App() {
         </View>
       </View>
 
+      {/* SYSTEM ARCHITECTURE & SKILLS DEMONSTRATED */}
+      <View style={[styles.section, styles.sectionAlt]}>
+        <View style={styles.container}>
+          <Text style={styles.h2}>🏗️ Project Architecture & Engineering Skills</Text>
+          <Text style={styles.paragraph}>Building this cloud-based portfolio and dynamic intake system demonstrated the following full-stack competencies:</Text>
+          
+          <View style={styles.card}>
+            <Text style={styles.boldText}>Front-End UI & State Management</Text>
+            <Text style={styles.listItem}>• Built a cross-platform responsive interface using React Native and Flexbox grid layouts.</Text>
+            <Text style={styles.listItem}>• Managed complex component state (useState) for dynamic form routing and interactive image modals.</Text>
+            <Text style={styles.listItem}>• Implemented asynchronous JavaScript (async/await, fetch) to handle non-blocking API network requests.</Text>
+
+            <View style={{marginTop: 15}}></View>
+
+            <Text style={styles.boldText}>Backend Integration & Serverless API</Text>
+            <Text style={styles.listItem}>• Engineered a serverless REST webhook using Google Apps Script to securely parse JSON POST payloads.</Text>
+            <Text style={styles.listItem}>• Automated data pipelines by routing frontend React Native submissions directly into a live Google Sheets database.</Text>
+            
+            <View style={{marginTop: 15}}></View>
+
+            <Text style={styles.boldText}>Cloud DevOps & IT Infrastructure</Text>
+            <Text style={styles.listItem}>• Deployed a static web application to the cloud utilizing Microsoft Azure Static Web Apps.</Text>
+            <Text style={styles.listItem}>• Configured advanced DNS records (MX, TXT, CNAME) to securely route custom domains and navigate enterprise email firewalls.</Text>
+          </View>
+        </View>
+      </View>
+
       {/* Footer */}
       <View style={styles.footer}>
         <Text style={styles.footerText}>© 2026 Cornell Cornelius Jr. — Benton, Arkansas.</Text>
