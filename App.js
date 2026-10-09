@@ -12,7 +12,6 @@ export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-// ---> PUT THE EMOJI CATEGORIES ARRAY RIGHT HERE <---
   const categories = [
     { label: '📱 Phone', value: 'Phone' },
     { label: '💻 Tablet', value: 'Tablet' },
@@ -80,7 +79,7 @@ export default function App() {
       {/* Professional Summary */}
       <View style={styles.section}>
         <View style={styles.container}>
-          <Text style={styles.h2}>About My Work</Text>
+          <Text style={styles.h2}>💡 About My Work</Text>
           <Text style={styles.paragraph}>
             I am a comprehensive technology specialist serving the Central Arkansas area. With a strong foundation in Computer Information Systems, I diagnose and repair complex device hardware while actively engineering modern software solutions. My goal is to build resilient systems, whether that means rescuing a damaged iPad display or deploying a scalable React Native application to the cloud.
           </Text>
@@ -90,7 +89,7 @@ export default function App() {
       {/* Education & Certifications */}
       <View style={[styles.section, styles.sectionAlt]}>
         <View style={styles.container}>
-          <Text style={styles.h2}>Education & Training</Text>
+          <Text style={styles.h2}>🎓 Education & Training</Text>
           <View style={styles.card}>
             <Text style={styles.boldText}>Degrees & Coursework</Text>
             <Text style={styles.listItem}>• Associate of Science in Computer Information Systems</Text>
@@ -107,7 +106,7 @@ export default function App() {
       {/* Development Projects */}
       <View style={styles.section}>
         <View style={styles.container}>
-          <Text style={styles.h2}>Software & Cloud Development</Text>
+          <Text style={styles.h2}>🚀 Software & Cloud Development</Text>
           <Text style={styles.paragraph}>Current programming workflows and technical proficiencies:</Text>
           <View style={styles.card}>
             <Text style={styles.listItem}>
@@ -129,7 +128,7 @@ export default function App() {
       {/* Hardware Repair Services */}
       <View style={[styles.section, styles.sectionAlt]}>
         <View style={styles.container}>
-          <Text style={styles.h2}>Device Repair & IT Support</Text>
+          <Text style={styles.h2}>🛠️ Device Repair & IT Support</Text>
           <Text style={styles.paragraph}>Providing reliable, local hardware repair and system troubleshooting:</Text>
           <View style={styles.card}>
             <Text style={styles.listItem}>• Mobile device digitizer & LCD screen replacement (B-7000 adhesion)</Text>
@@ -143,7 +142,7 @@ export default function App() {
       {/* INTERACTIVE REPAIR INTAKE FORM */}
       <View style={styles.section}>
         <View style={styles.container}>
-          <Text style={styles.h2}>Request a Repair Quote</Text>
+          <Text style={styles.h2}>📝 Request a Repair Quote</Text>
           <Text style={styles.paragraph}>Select your device category, provide your details, and describe your issue below.</Text>
           
           <View style={styles.formCard}>
@@ -246,31 +245,4 @@ export default function App() {
 
 // STYLES
 const styles = StyleSheet.create({
-  body: { flex: 1, backgroundColor: '#0f172a' },
-  container: { width: '100%', maxWidth: 960, alignSelf: 'center', paddingHorizontal: 20 },
-  header: { paddingTop: 60, paddingBottom: 40, borderBottomWidth: 1, borderBottomColor: '#374151', alignItems: 'center' },
-  h1: { fontSize: 36, fontWeight: 'bold', color: '#e5e7eb', textAlign: 'center', marginBottom: 10 },
-  tagline: { fontSize: 20, color: '#38bdf8', textAlign: 'center', marginBottom: 5 },
-  subTagline: { fontSize: 16, color: '#9ca3af', textAlign: 'center', marginBottom: 25 },
-  btnPrimary: { backgroundColor: '#38bdf8', paddingVertical: 12, paddingHorizontal: 24, borderRadius: 30, alignSelf: 'center', width: '100%', alignItems: 'center' },
-  btnText: { color: '#0b1120', fontWeight: 'bold', fontSize: 16 },
-  section: { paddingVertical: 40 },
-  sectionAlt: { backgroundColor: '#111827' },
-  h2: { fontSize: 26, fontWeight: 'bold', color: '#e5e7eb', marginBottom: 15 },
-  paragraph: { fontSize: 16, color: '#e5e7eb', lineHeight: 24, marginBottom: 15 },
-  boldText: { fontSize: 16, fontWeight: 'bold', color: '#38bdf8', marginTop: 10, marginBottom: 10 },
-  card: { backgroundColor: '#1f2937', padding: 20, borderRadius: 10, borderWidth: 1, borderColor: '#374151', marginBottom: 20 },
-  listItem: { fontSize: 16, color: '#e5e7eb', marginBottom: 8 },
-  formCard: { backgroundColor: '#1e293b', padding: 25, borderRadius: 12, borderWidth: 1, borderColor: '#334155' },
-  inputLabel: { color: '#e2e8f0', fontSize: 14, fontWeight: '600', marginBottom: 6 },
-  inputField: { backgroundColor: '#0f172a', color: '#f8fafc', borderWidth: 1, borderColor: '#334155', borderRadius: 8, padding: 12, fontSize: 16, marginBottom: 20 },
-  categoryGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: 20 },
-  categoryButton: { width: '48%', padding: 12, borderWidth: 1, borderColor: '#334155', borderRadius: 8, marginBottom: 10, alignItems: 'center', backgroundColor: '#0f172a' },
-  selectedCategory: { backgroundColor: '#38bdf8', borderColor: '#38bdf8' },
-  categoryText: { color: '#9ca3af', fontWeight: '500' },
-  selectedCategoryText: { color: '#0b1120', fontWeight: 'bold' },
-  successText: { color: '#4ade80', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
-  errorText: { color: '#f87171', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
-  footer: { paddingVertical: 30, borderTopWidth: 1, borderTopColor: '#374151', alignItems: 'center' },
-  footerText: { color: '#9ca3af', fontSize: 14 }
-});
+  body: { flex: 1, backgroundColor: '#0
