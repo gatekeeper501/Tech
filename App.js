@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking, TextInput, ActivityIndicator, Alert, Image } from 'react-native';
+import imgRepair from './assets/IMG_5717.png';
+import imgClamp2 from './assets/IMG_6004.png';
+import imgClamp from './assets/IMG_6062.png';
 
 export default function App() {
   const [name, setName] = useState('');
@@ -255,6 +258,7 @@ export default function App() {
 
         </View>
       </View>
+      
       {/* VISUAL WORKBENCH & PROJECT GALLERY */}
       <View style={styles.section}>
         <View style={styles.container}>
@@ -262,27 +266,34 @@ export default function App() {
           <Text style={styles.paragraph}>A visual look at my recent hardware restorations and cloud engineering work:</Text>
           
           <View style={styles.galleryGrid}>
+            
+            {/* Card 1: Disassembly */}
             <View style={styles.galleryCard}>
-              <Image 
-                source={{ uri: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=600&q=80' }} 
-                style={styles.galleryImage} 
-              />
+              <Image source={imgRepair} style={styles.galleryImage} />
               <View style={styles.galleryContent}>
-                <Text style={styles.galleryTitle}>Precision Tablet & Phone Repair</Text>
-                <Text style={styles.galleryDesc}>Professional digitizer and LCD replacements using structural B-7000 adhesive techniques.</Text>
+                <Text style={styles.galleryTitle}>Precision Tablet Disassembly</Text>
+                <Text style={styles.galleryDesc}>Careful internal component organization and battery replacement workflows.</Text>
               </View>
             </View>
 
+            {/* Card 2: Boot Testing */}
             <View style={styles.galleryCard}>
-              <Image 
-                source={{ uri: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80' }} 
-                style={styles.galleryImage} 
-              />
+              <Image source={imgClamp2} style={styles.galleryImage} />
               <View style={styles.galleryContent}>
-                <Text style={styles.galleryTitle}>Cloud & App Development</Text>
-                <Text style={styles.galleryDesc}>Building responsive React Native applications deployed via Microsoft Azure and GitHub CI/CD pipelines.</Text>
+                <Text style={styles.galleryTitle}>Hardware Diagnostics & Boot</Text>
+                <Text style={styles.galleryDesc}>Thorough post-repair display testing and system validation.</Text>
               </View>
             </View>
+
+            {/* Card 3: Clamp Curing */}
+            <View style={styles.galleryCard}>
+              <Image source={imgClamp} style={styles.galleryImage} />
+              <View style={styles.galleryContent}>
+                <Text style={styles.galleryTitle}>Structural B-7000 Adhesion & Clamping</Text>
+                <Text style={styles.galleryDesc}>Professional screen seating and precision clamp-curing for a secure, factory-grade finish.</Text>
+              </View>
+            </View>
+
           </View>
         </View>
       </View>
