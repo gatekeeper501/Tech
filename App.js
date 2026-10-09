@@ -14,6 +14,14 @@ export default function App() {
 
   const categories = ['Phone', 'Tablet', 'Computer', 'Other Electronics'];
 
+// ---> PUT THE EMOJI CATEGORIES ARRAY RIGHT HERE <---
+  const categories = [
+    { label: '📱 Phone', value: 'Phone' },
+    { label: '💻 Tablet', value: 'Tablet' },
+    { label: '🖥️ Computer', value: 'Computer' },
+    { label: '⚡ Other Electronics', value: 'Other Electronics' }
+  ];
+  
   // --- REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT URL ---
   const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwLSk2w_Z2GEfo4kWzUmTg3HyLKvZLBKRf2Nj-XYIEoy4mGlQK2awAg73Hn8-bMujg4/exec';
 
@@ -176,12 +184,12 @@ export default function App() {
             <View style={styles.categoryGrid}>
               {categories.map((cat) => (
                 <TouchableOpacity 
-                  key={cat} 
-                  style={[styles.categoryButton, deviceCategory === cat && styles.selectedCategory]} 
-                  onPress={() => setDeviceCategory(cat)}
+                  key={cat.value} 
+                  style={[styles.categoryButton, deviceCategory === cat.value && styles.selectedCategory]} 
+                  onPress={() => setDeviceCategory(cat.value)}
                 >
-                  <Text style={[styles.categoryText, deviceCategory === cat && styles.selectedCategoryText]}>
-                    {cat}
+                  <Text style={[styles.categoryText, deviceCategory === cat.value && styles.selectedCategoryText]}>
+                    {cat.label}
                   </Text>
                 </TouchableOpacity>
               ))}
