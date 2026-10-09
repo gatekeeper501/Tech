@@ -336,7 +336,11 @@ const styles = StyleSheet.create({
   section: { paddingVertical: 40 },
   galleryGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: 10 },
   galleryCard: { width: '31%', backgroundColor: '#1e293b', borderRadius: 12, borderWidth: 1, borderColor: '#334155', overflow: 'hidden', marginBottom: 15 },
-  galleryImage: { width: '100%', height: 120, resizeMode: 'cover' },
+  galleryImage: { width: '100%', 
+    height: 120, 
+    resizeMode: 'cover',
+    backgroundColor: '#0f172a' // Fallback background while loading
+  },
   galleryContent: { padding: 12 },
   galleryTitle: { color: '#38bdf8', fontSize: 14, fontWeight: 'bold', marginBottom: 4 },
   galleryDesc: { color: '#9ca3af', fontSize: 12, lineHeight: 16 },
