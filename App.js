@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking, TextInput, ActivityIndicator, Alert, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Linking,
+  TextInput,
+  ActivityIndicator,
+  Alert,
+  Image,
+  Modal
+} from 'react-native';
 import imgRepair from './assets/IMG_5717.png';
 import imgClamp2 from './assets/IMG_6004.png';
 import imgClamp from './assets/IMG_6062.png';
@@ -306,18 +318,34 @@ export default function App() {
       </View>
 
       {/* FULL-SCREEN IMAGE EXPANSION MODAL */}
-      {selectedImage && (
-        <TouchableOpacity 
-          style={styles.modalOverlay} 
-          onPress={() => setSelectedImage(null)}
-          activeOpacity={1}
-        >
-          <View style={styles.modalContent}>
-            <Image source={selectedImage} style={styles.fullScreenImage} resizeMode="contain" />
-            <Text style={styles.closeHint}>Tap anywhere to close</Text>
-          </View>
-        </TouchableOpacity>
+<Modal
+  visible={selectedImage !== null}
+  transparent={true}
+  animationType="fade"
+  onRequestClose={() => setSelectedImage(null)}
+>
+  <TouchableOpacity
+    style={styles.modalOverlay}
+    activeOpacity={1}
+    onPress={() => setSelectedImage(null)}
+    accessibilityRole="button"
+    accessibilityLabel="Close enlarged photo"
+  >
+    <View style={styles.modalContent}>
+      {selectedImage !== null && (
+        <Image
+          source={selectedImage}
+          style={styles.fullScreenImage}
+          resizeMode="contain"
+        />
       )}
+
+      <Text style={styles.closeHint}>
+        Tap anywhere to close
+      </Text>
+    </View>
+  </TouchableOpacity>
+</Modal>
 
     </ScrollView>
   );
@@ -368,17 +396,12 @@ const styles = StyleSheet.create({
   footer: { paddingVertical: 30, borderTopWidth: 1, borderTopColor: '#374151', alignItems: 'center' },
   footerText: { color: '#9ca3af', fontSize: 14 },
   modalOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(11, 17, 32, 0.95)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1000,
-    padding: 20
-  },
+  flex: 1,
+  backgroundColor: 'rgba(11, 17, 32, 0.95)',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 20
+},
   modalContent: {
     width: '100%',
     maxWidth: 800,
