@@ -23,7 +23,7 @@ export default function App() {
     Phone: ['iPhone 17 Pro Max', 'iPhone 16 Pro', 'Galaxy S Series'],
     Tablet: ['13-inch iPad Pro', 'iPad Air', 'Galaxy Tab'],
     Computer: ['MacBook Pro', 'Dell Latitude', 'Custom Windows PC'],
-    Other Electronics: ['Trek E-Bike Battery', 'DVR Security System', 'J-Tech HDMI Extender']
+    'Other Electronics': ['Trek E-Bike Battery', 'DVR Security System', 'J-Tech HDMI Extender']
   };
 
   const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwLSk2w_Z2GEfo4kWzUmTg3HyLKvZLBKRf2Nj-XYIEoy4mGlQK2awAg73Hn8-bMujg4/exec';
