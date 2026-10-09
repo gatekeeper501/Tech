@@ -12,8 +12,6 @@ export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  const categories = ['Phone', 'Tablet', 'Computer', 'Other Electronics'];
-
 // ---> PUT THE EMOJI CATEGORIES ARRAY RIGHT HERE <---
   const categories = [
     { label: '📱 Phone', value: 'Phone' },
@@ -21,7 +19,7 @@ export default function App() {
     { label: '🖥️ Computer', value: 'Computer' },
     { label: '⚡ Other Electronics', value: 'Other Electronics' }
   ];
-  
+
   // --- REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT URL ---
   const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwLSk2w_Z2GEfo4kWzUmTg3HyLKvZLBKRf2Nj-XYIEoy4mGlQK2awAg73Hn8-bMujg4/exec';
 
