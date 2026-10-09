@@ -6,17 +6,21 @@ export default function App() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [deviceCategory, setDeviceCategory] = useState('Phone'); // Default multi-choice
+  const [deviceModel, setDeviceModel] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+
+  const categories = ['Phone', 'Tablet', 'Computer', 'Other Electronics'];
 
   // --- REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT URL ---
   const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwLSk2w_Z2GEfo4kWzUmTg3HyLKvZLBKRf2Nj-XYIEoy4mGlQK2awAg73Hn8-bMujg4/exec';
 
   // --- FUNCTION TO SEND DATA TO GOOGLE SHEETS ---
   const submitForm = async () => {
-    if (!name || !email || !message) {
-      alert('Please fill out your Name, Email, and Message.');
+    if (!name || !email || !deviceModel || !message) {
+      alert('Please fill out your Name, Email, Device Model, and Message.');
       return;
     }
 
@@ -34,6 +38,8 @@ export default function App() {
           name: name,
           email: email,
           phone: phone,
+          deviceCategory: deviceCategory,
+          deviceModel: deviceModel,
           message: message
         })
       });
@@ -42,8 +48,9 @@ export default function App() {
       setName('');
       setEmail('');
       setPhone('');
+      setDeviceModel('');
       setMessage('');
-      setSubmitStatus('Success! Your message has been sent. I will be in touch shortly.');
+      setSubmitStatus('Success! Your repair request has been sent. I will be in touch shortly.');
       
     } catch (error) {
       setSubmitStatus('Oops! Something went wrong. Please email me directly instead.');
@@ -58,7 +65,7 @@ export default function App() {
       {/* Header Section */}
       <View style={styles.header}>
         <View style={styles.container}>
-          <Text style={styles.h1}>Cornell Cornelius</Text>
+          <Text style={styles.h1}>Cornell Cornelius Jr.</Text>
           <Text style={styles.tagline}>IT Professional | Developer | Tech Repair Specialist</Text>
           <Text style={styles.subTagline}>Bridging the gap between hardware diagnostics and cloud-based software development.</Text>
         </View>
@@ -97,10 +104,18 @@ export default function App() {
           <Text style={styles.h2}>Software & Cloud Development</Text>
           <Text style={styles.paragraph}>Current programming workflows and technical proficiencies:</Text>
           <View style={styles.card}>
-            <Text style={styles.listItem}>• <Text style={{fontWeight: 'bold', color: '#38bdf8'}}>Cloud Hosting:</Text> Deploying static web applications via Microsoft Azure and automated GitHub CI/CD pipelines.</Text>
-            <Text style={styles.listItem}>• <Text style={{fontWeight: 'bold', color: '#38bdf8'}}>Front-End Architecture:</Text> Building responsive, cross-platform UI components using React Native and Expo.</Text>
-            <Text style={styles.listItem}>• <Text style={{fontWeight: 'bold', color: '#38bdf8'}}>Automation:</Text> Designing custom iOS shortcut scripts for automated mobile routing and security management.</Text>
-            <Text style={styles.listItem}>• <Text style={{fontWeight: 'bold', color: '#38bdf8'}}>Development Environments:</Text> Utilizing GitHub Codespaces, Visual Studio Code, and Anaconda / Python distributions.</Text>
+            <Text style={styles.listItem}>
+              <Text style={{fontWeight: 'bold', color: '#38bdf8'}}>Cloud Hosting:</Text> Deploying static web applications via Microsoft Azure and automated GitHub CI/CD pipelines.
+            </Text>
+            <Text style={styles.listItem}>
+              <Text style={{fontWeight: 'bold', color: '#38bdf8'}}>Front-End Architecture:</Text> Building responsive, cross-platform UI components using React Native and Expo.
+            </Text>
+            <Text style={styles.listItem}>
+              <Text style={{fontWeight: 'bold', color: '#38bdf8'}}>Automation:</Text> Designing custom iOS shortcut scripts for automated mobile routing and security management.
+            </Text>
+            <Text style={styles.listItem}>
+              <Text style={{fontWeight: 'bold', color: '#38bdf8'}}>Development Environments:</Text> Utilizing GitHub Codespaces, Visual Studio Code, and Anaconda / Python distributions.
+            </Text>
           </View>
         </View>
       </View>
@@ -119,11 +134,11 @@ export default function App() {
         </View>
       </View>
 
-      {/* NEW: Interactive Contact Form Section */}
+      {/* INTERACTIVE REPAIR INTAKE FORM */}
       <View style={styles.section}>
         <View style={styles.container}>
-          <Text style={styles.h2}>Get in Touch</Text>
-          <Text style={styles.paragraph}>Need a repair quote or looking for an IT contractor? Drop me a line below.</Text>
+          <Text style={styles.h2}>Request a Repair Quote</Text>
+          <Text style={styles.paragraph}>Select your device category, provide your details, and describe your issue below.</Text>
           
           <View style={styles.formCard}>
             <Text style={styles.inputLabel}>Name *</Text>
@@ -156,10 +171,35 @@ export default function App() {
               onChangeText={setPhone}
             />
 
-            <Text style={styles.inputLabel}>How can I help you? *</Text>
+            {/* MULTI-CHOICE CATEGORY SELECTOR */}
+            <Text style={styles.inputLabel}>Device Category *</Text>
+            <View style={styles.categoryGrid}>
+              {categories.map((cat) => (
+                <TouchableOpacity 
+                  key={cat} 
+                  style={[styles.categoryButton, deviceCategory === cat && styles.selectedCategory]} 
+                  onPress={() => setDeviceCategory(cat)}
+                >
+                  <Text style={[styles.categoryText, deviceCategory === cat && styles.selectedCategoryText]}>
+                    {cat}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            <Text style={styles.inputLabel}>Device Brand & Model *</Text>
+            <TextInput 
+              style={styles.inputField} 
+              placeholder="e.g., iPhone 17 Pro Max, 13-inch iPad Pro, Dell Latitude" 
+              placeholderTextColor="#6b7280"
+              value={deviceModel}
+              onChangeText={setDeviceModel}
+            />
+
+            <Text style={styles.inputLabel}>Describe the Issue *</Text>
             <TextInput 
               style={[styles.inputField, {height: 100}]} 
-              placeholder="Tell me about your device issue or IT project..." 
+              placeholder="Tell me about your cracked screen, power issue, or IT project..." 
               placeholderTextColor="#6b7280"
               multiline={true}
               textAlignVertical="top"
@@ -181,7 +221,7 @@ export default function App() {
               {isSubmitting ? (
                 <ActivityIndicator color="#0b1120" />
               ) : (
-                <Text style={styles.btnText}>Send Message</Text>
+                <Text style={styles.btnText}>Submit Repair Request</Text>
               )}
             </TouchableOpacity>
           </View>
@@ -191,7 +231,7 @@ export default function App() {
 
       {/* Footer */}
       <View style={styles.footer}>
-        <Text style={styles.footerText}>© 2026 Cornell Cornelius — Bryant, Arkansas.</Text>
+        <Text style={styles.footerText}>© 2026 Cornell Cornelius Jr. — Bryant, Arkansas.</Text>
       </View>
 
     </ScrollView>
@@ -218,6 +258,11 @@ const styles = StyleSheet.create({
   formCard: { backgroundColor: '#1e293b', padding: 25, borderRadius: 12, borderWidth: 1, borderColor: '#334155' },
   inputLabel: { color: '#e2e8f0', fontSize: 14, fontWeight: '600', marginBottom: 6 },
   inputField: { backgroundColor: '#0f172a', color: '#f8fafc', borderWidth: 1, borderColor: '#334155', borderRadius: 8, padding: 12, fontSize: 16, marginBottom: 20 },
+  categoryGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: 20 },
+  categoryButton: { width: '48%', padding: 12, borderWidth: 1, borderColor: '#334155', borderRadius: 8, marginBottom: 10, alignItems: 'center', backgroundColor: '#0f172a' },
+  selectedCategory: { backgroundColor: '#38bdf8', borderColor: '#38bdf8' },
+  categoryText: { color: '#9ca3af', fontWeight: '500' },
+  selectedCategoryText: { color: '#0b1120', fontWeight: 'bold' },
   successText: { color: '#4ade80', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
   errorText: { color: '#f87171', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
   footer: { paddingVertical: 30, borderTopWidth: 1, borderTopColor: '#374151', alignItems: 'center' },
