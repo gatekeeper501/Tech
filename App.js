@@ -1,74 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, ScrollView, Text } from 'react-native';
 
 // Importing your isolated components
+import NavBar from './components/NavBar';
 import Header from './components/Header';
 import RepairForm from './components/RepairForm';
 import Gallery from './components/Gallery';
+import Architecture from './components/Architecture';
 
 export default function App() {
+  // Track which page is currently active (Defaults to 'Home')
+  const [activePage, setActivePage] = useState('Home');
+
+  // A helper function to act as our router
+  const renderPage = () => {
+    switch (activePage) {
+      case 'Home':
+        return (
+          <View>
+            <View style={styles.section}>
+              <View style={styles.container}>
+                <Text style={styles.h2}>💡 About My Work</Text>
+                <Text style={styles.paragraph}>I am a comprehensive technology specialist serving the Central Arkansas area. With a strong foundation in Computer Information Systems, I diagnose and repair complex device hardware while actively engineering modern software solutions.</Text>
+              </View>
+            </View>
+
+            <Gallery />
+
+            <View style={[styles.section, styles.sectionAlt]}>
+              <View style={styles.container}>
+                <Text style={styles.h2}>🎓 Education & Training</Text>
+                <View style={styles.card}>
+                  <Text style={styles.listItem}>• Associate of Science in Computer Information Systems</Text>
+                  <Text style={styles.listItem}>• Computer Science Coursework — University of Arkansas at Little Rock</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        );
+      case 'Repair':
+        return <RepairForm />;
+      case 'Architecture':
+        return <Architecture />; // <-- Uses your new isolated component!
+      default:
+        return null;
+    }
+  };
+
   return (
-    <ScrollView style={styles.body}>
+    <View style={styles.body}>
       
-      {/* 1. Header Component */}
-      <Header />
+      {/* The Navigation Bar stays pinned at the top */}
+      <NavBar activePage={activePage} setActivePage={setActivePage} />
 
-      {/* 2. Static Content Sections */}
-      <View style={styles.section}>
-        <View style={styles.container}>
-          <Text style={styles.h2}>💡 About My Work</Text>
-          <Text style={styles.paragraph}>I am a comprehensive technology specialist serving the Central Arkansas area. With a strong foundation in Computer Information Systems, I diagnose and repair complex device hardware while actively engineering modern software solutions.</Text>
+      <ScrollView style={{ flex: 1 }}>
+        
+        {/* The Header stays visible on every page */}
+        <Header />
+
+        {/* This runs our router and injects the correct page content below the header */}
+        {renderPage()}
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>© 2026 Cornell Cornelius Jr. — Benton, Arkansas.</Text>
         </View>
-      </View>
 
-      <View style={[styles.section, styles.sectionAlt]}>
-        <View style={styles.container}>
-          <Text style={styles.h2}>🎓 Education & Training</Text>
-          <View style={styles.card}>
-            <Text style={styles.listItem}>• Associate of Science in Computer Information Systems</Text>
-            <Text style={styles.listItem}>• Computer Science Coursework — University of Arkansas at Little Rock</Text>
-          </View>
-        </View>
-      </View>
-
-      {/* 3. Repair Form Component */}
-      <RepairForm />
-
-      {/* 4. Image Gallery Component */}
-      <Gallery />
-
-      {/* 5. Project Architecture & Engineering Skills */}
-      <View style={[styles.section, styles.sectionAlt]}>
-        <View style={styles.container}>
-          <Text style={styles.h2}>🏗️ Project Architecture & Engineering Skills</Text>
-          <Text style={styles.paragraph}>Building this cloud-based portfolio and dynamic intake system demonstrated the following full-stack competencies:</Text>
-          
-          <View style={styles.card}>
-            <Text style={styles.boldText}>Front-End UI & State Management</Text>
-            <Text style={styles.listItem}>• Built a cross-platform responsive interface using React Native and Flexbox grid layouts.</Text>
-            <Text style={styles.listItem}>• Managed complex component state (useState) for dynamic form routing and interactive image modals.</Text>
-
-            <View style={{marginTop: 12}}></View>
-
-            <Text style={styles.boldText}>Back-End Integration & Serverless API</Text>
-            <Text style={styles.listItem}>• Engineered a serverless REST webhook using Google Apps Script to securely parse JSON POST payloads.</Text>
-            <Text style={styles.listItem}>• Automated data pipelines by routing frontend React Native submissions directly into a live Google Sheets database.</Text>
-
-            <View style={{marginTop: 15}}></View>
-
-            <Text style={styles.boldText}>Cloud DevOps & IT Infrastructure</Text>
-            <Text style={styles.listItem}>• Deployed a static web application to the cloud utilizing Microsoft Azure Static Web Apps.</Text>
-            <Text style={styles.listItem}>• Configured advanced DNS records (MX, TXT, CNAME) to securely route custom domains and navigate enterprise email firewalls.</Text>
-          </View>
-
-        </View>
-      </View>
-
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>© 2026 Cornell Cornelius Jr. — Benton, Arkansas.</Text>
-      </View>
-
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -81,7 +79,6 @@ const styles = StyleSheet.create({
   paragraph: { fontSize: 16, color: '#e5e7eb', lineHeight: 24, marginBottom: 15 },
   card: { backgroundColor: '#1f2937', padding: 20, borderRadius: 10, borderWidth: 1, borderColor: '#374151', marginBottom: 20 },
   listItem: { fontSize: 16, color: '#e5e7eb', marginBottom: 8 },
-  boldText: { fontSize: 16, fontWeight: 'bold', color: '#38bdf8', marginBottom: 5 },
   footer: { paddingVertical: 30, borderTopWidth: 1, borderTopColor: '#374151', alignItems: 'center' },
   footerText: { color: '#9ca3af', fontSize: 14 }
 });
