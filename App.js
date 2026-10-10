@@ -32,8 +32,8 @@ export default function App() {
                 <Text style={styles.h2}>🎓 Education & Training</Text>
                 <View style={styles.card}>
                   <Text style={styles.listItem}>• Associate of Science in Computer Information Systems</Text>
-                  <Text style={styles.listItem}>• Computer Science Coursework — University of Arkansas at Little Rock</Text>
                   <Text style={styles.listItem}>• Foundational Coursework - University of Arkansas, Fayetteville</Text>
+                  <Text style={styles.listItem}>• Computer Science Coursework — University of Arkansas at Little Rock</Text>
                 </View>
               </View>
             </View>
