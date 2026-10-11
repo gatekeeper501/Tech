@@ -6,7 +6,7 @@ export default function Contact() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         // 1. Regular Expression pattern for standard email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -22,8 +22,37 @@ export default function Contact() {
             return; 
         }
 
-        // 4. If the code makes it down here, all tests passed!
-        alert('Validation passed! Contact system is ready to be wired up.');
+        // 4. Send the data to your Google Sheets Webhook
+        try {
+            // We will paste your actual Google Apps Script URL here once we update it
+            const webhookUrl = 'https://script.google.com/macros/s/AKfycbxGV2v-xWkCCG1rZnp4-HHyzos0OmpAzxvF3XPiSQtJjp8pSBq_oJwaed80AvIT762lKw/exec';
+            
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify({
+                    formType: 'Contact', // This tells Google Sheets which tab to put it in
+                    name: name,
+                    email: email,
+                    message: message,
+                    date: new Date().toLocaleString()
+                }),
+            });
+
+            if (response.ok) {
+                alert('Message sent successfully! I will get back to you soon.');
+                // Clear the form out after a successful send
+                setName('');
+                setEmail('');
+                setMessage('');
+            } else {
+                alert('There was a problem sending your message. Please try again.');
+            }
+        } catch (error) {
+            alert('Network error. Please check your connection and try again.');
+        }
     };
 
     return (
