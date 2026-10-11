@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
-import imgRepair from '../assets/IMG_5717.png';
-import imgClamp2 from '../assets/IMG_6004.png';
-import imgClamp from '../assets/IMG_6062.png';
+// Updated to the compressed .jpg files
+import imgRepair from '../assets/IMG_5717.jpg';
+import imgClamp2 from '../assets/IMG_6004.jpg';
+import imgClamp from '../assets/IMG_6062.jpg';
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -48,9 +49,25 @@ const styles = StyleSheet.create({
   container: { width: '100%', maxWidth: 960, alignSelf: 'center', paddingHorizontal: 20 },
   section: { paddingVertical: 40 },
   h2: { fontSize: 26, fontWeight: 'bold', color: '#e5e7eb', marginBottom: 15 },
-  galleryGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: 10 },
-  galleryCard: { width: '31%', backgroundColor: '#1e293b', borderRadius: 12, borderWidth: 1, borderColor: '#334155', overflow: 'hidden', marginBottom: 15 },
-  galleryImage: { width: '100%', height: 120, resizeMode: 'cover', backgroundColor: '#0f172a' },
+  galleryGrid: { 
+    flexDirection: 'row', 
+    flexWrap: 'wrap', 
+    justifyContent: 'center', // Centers them if they wrap
+    gap: 15, // Adds clean spacing between cards
+    marginTop: 10 
+  },
+  galleryCard: { 
+    flex: 1, 
+    minWidth: 280, // Forces them to stack on mobile, stay side-by-side on desktop
+    maxWidth: 400, // Prevents them from getting too massive on ultrawide screens
+    backgroundColor: '#1e293b', 
+    borderRadius: 12, 
+    borderWidth: 1, 
+    borderColor: '#334155', 
+    overflow: 'hidden', 
+    marginBottom: 15 
+  },
+  galleryImage: { width: '100%', height: 200, resizeMode: 'cover', backgroundColor: '#0f172a' },
   galleryContent: { padding: 12 },
   galleryTitle: { color: '#38bdf8', fontSize: 14, fontWeight: 'bold', marginBottom: 4 },
   modalOverlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(11, 17, 32, 0.95)', justifyContent: 'center', alignItems: 'center', zIndex: 1000, padding: 20 },
