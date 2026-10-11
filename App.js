@@ -7,6 +7,7 @@ import Header from './components/Header';
 import RepairForm from './components/RepairForm';
 import Gallery from './components/Gallery';
 import Architecture from './components/Architecture';
+import Contact from './components/Contact'; // <-- ADDED MISSING IMPORT HERE
 
 export default function App() {
   // Track which page is currently active (Defaults to 'Home')
@@ -31,6 +32,7 @@ export default function App() {
               <View style={styles.container}>
                 <Text style={styles.h2}>🎓 Education & Training</Text>
                 <View style={styles.card}>
+                  {/* Removed the floating hyphens that cause React errors */}
                   <Text style={styles.listItem}>• Associate of Science in Computer Information Systems</Text>
                   <Text style={styles.listItem}>• Foundational Coursework - University of Arkansas, Fayetteville</Text>
                   <Text style={styles.listItem}>• Computer Science Coursework - University of Arkansas at Little Rock</Text>
@@ -42,7 +44,9 @@ export default function App() {
       case 'Repair':
         return <RepairForm />;
       case 'Architecture':
-        return <Architecture />; // <-- Uses your new isolated component!
+        return <Architecture />; 
+      case 'Contact':
+        return <Contact />;
       default:
         return null;
     }

@@ -27,6 +27,13 @@ export default function NavBar({ activePage, setActivePage }) {
             </TouchableOpacity>
 
             <TouchableOpacity
+                style={[styles.navButton, activePage === 'Contact' && styles.activeButton]}
+                onPress={() => setActivePage('Contact')}
+            >
+                <Text style={[styles.navText, activePage === 'Contact' && styles.activeText]}>Ask a Question</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
                 style={[styles.navButton, activePage === 'Architecture' && styles.activeButton]}
                 onPress={() => setActivePage('Architecture')}
             >
