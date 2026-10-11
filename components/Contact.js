@@ -7,8 +7,23 @@ export default function Contact() {
     const [message, setMessage] = useState('');
 
     const handleSubmit = () => {
-        // we will connect this to Google Sheets webhook in the next step
-        alert('Contact system is ready to be wired up!');
+        // 1. Regular Expression pattern for standard email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // 2. Check if any fields are completely blank FIRST
+        if (!name || !email || !message) {
+            alert('Please fill out all fields before submitting.');
+            return; 
+        }
+
+        // 3. Test the email input against our RegEx pattern
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address (e.g., name@example.com).');
+            return; 
+        }
+
+        // 4. If the code makes it down here, all tests passed!
+        alert('Validation passed! Contact system is ready to be wired up.');
     };
 
     return (
