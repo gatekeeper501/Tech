@@ -7,7 +7,7 @@ import Header from './components/Header';
 import RepairForm from './components/RepairForm';
 import Gallery from './components/Gallery';
 import Architecture from './components/Architecture';
-import Contact from './components/Contact'; // <-- ADDED MISSING IMPORT HERE
+import Contact from './components/Contact'; 
 
 export default function App() {
   // Track which page is currently active (Defaults to 'Home')
@@ -22,7 +22,7 @@ export default function App() {
             <View style={styles.section}>
               <View style={styles.container}>
                 <Text style={styles.h2}>💡 About My Work</Text>
-                <Text style={styles.paragraph}>I am a comprehensive technology specialist serving the Central Arkansas area. With a strong foundation in Computer Information Systems, I diagnose and repair complex device hardware while actively engineering modern software solutions.</Text>
+                <Text style={styles.paragraph}>Serving Central Arkansas, I provide comprehensive IT services encompassing both hardware support and software engineering. My background includes cross-platform application development (React Native, Expo), cloud infrastructure management (Azure, GitHub Actions), and intricate device repair. I am also experienced in configuring low-voltage security infrastructure and translating complex technical challenges into clear solutions for my clients.</Text>
               </View>
             </View>
 
@@ -32,10 +32,17 @@ export default function App() {
               <View style={styles.container}>
                 <Text style={styles.h2}>🎓 Education & Training</Text>
                 <View style={styles.card}>
-                  {/* Removed the floating hyphens that cause React errors */}
+                  <Text style={styles.listItem}>• Prospective Student, B.S. Information Technology - Western Governors University</Text>
                   <Text style={styles.listItem}>• Associate of Science in Computer Information Systems</Text>
-                  <Text style={styles.listItem}>• Foundational Coursework - University of Arkansas, Fayetteville</Text>
-                  <Text style={styles.listItem}>• Computer Science Coursework - University of Arkansas at Little Rock</Text>
+                  <Text style={styles.listItem}>• Foundational Computer Science & Mathematics Coursework (Including Calculus I-III) - UA Little Rock & UA Fayetteville</Text>
+                </View>
+
+                <Text style={styles.h2}>🛠 Core Competencies & Hardware Skills</Text>
+                <View style={styles.card}>
+                  <Text style={styles.listItem}>• Frontend & App Engineering: React Native, JavaScript, C++, Java, SQL</Text>
+                  <Text style={styles.listItem}>• Hardware Engineering: VHDL, Verilog, Logic Board Diagnostics</Text>
+                  <Text style={styles.listItem}>• Cloud Infrastructure: Azure Static Web Apps, GitHub Actions CI/CD</Text>
+                  <Text style={styles.listItem}>• Physical Systems: Closed-Circuit Video Routing, Low-Voltage Device Deployment</Text>
                 </View>
               </View>
             </View>
