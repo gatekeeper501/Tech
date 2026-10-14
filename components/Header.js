@@ -1,22 +1,17 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
 export default function Header() {
   return (
-    <View style={styles.header}>
-      <View style={styles.container}>
-        <Text style={styles.h1}>Cornell Cornelius Jr.</Text>
-        <Text style={styles.tagline}>IT Professional | Developer | Tech Repair Specialist</Text>
-        <Text style={styles.subTagline}>Bridging the gap between hardware diagnostics and cloud-based software development.</Text>
-      </View>
-    </View>
+    <header className="pt-16 pb-10 border-b border-slate-700 text-center shrink-0">
+      <div className="w-full max-w-[960px] mx-auto px-5">
+        <h1 className="text-4xl font-bold text-gray-200 mb-2">
+          Cornell Cornelius Jr.
+        </h1>
+        <p className="text-xl text-sky-400 mb-2">
+          IT Professional | Developer | Tech Repair Specialist
+        </p>
+        <p className="text-base text-gray-400 mb-6">
+          Bridging the gap between hardware diagnostics and cloud-based software development.
+        </p>
+      </div>
+    </header>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { width: '100%', maxWidth: 960, alignSelf: 'center', paddingHorizontal: 20 },
-  header: { paddingTop: 60, paddingBottom: 40, borderBottomWidth: 1, borderBottomColor: '#374151', alignItems: 'center' },
-  h1: { fontSize: 36, fontWeight: 'bold', color: '#e5e7eb', textAlign: 'center', marginBottom: 10 },
-  tagline: { fontSize: 20, color: '#38bdf8', textAlign: 'center', marginBottom: 5 },
-  subTagline: { fontSize: 16, color: '#9ca3af', textAlign: 'center', marginBottom: 25 }
-});

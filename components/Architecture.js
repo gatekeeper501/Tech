@@ -1,43 +1,61 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
 export default function Architecture() {
-    return (
-        <View style={[styles.section, styles.sectionAlt]}>
-            <View style={styles.container}>
-                <Text style={styles.h2}>🏗️ Project Architecture & Engineering Skills</Text>
-                <Text style={styles.paragraph}>Building this cloud-based portfolio and dynamic intake system demonstrated the following full-stack competencies:</Text>
+  return (
+    <section className="py-10">
+      <div className="w-full max-w-[960px] mx-auto px-5">
+        <h2 className="text-2xl font-bold text-gray-200 mb-2">
+          🏗️ Project Architecture & Engineering Skills
+        </h2>
+        <p className="text-base text-gray-300 leading-relaxed mb-6">
+          Building this cloud-based portfolio and dynamic intake system demonstrated the following full-stack competencies:
+        </p>
 
-                <View style={styles.card}>
-                    <Text style={styles.boldText}>Front-End UI & State Management</Text>
-                    <Text style={styles.listItem}>• Built a cross-platform responsive interface using React Native and Flexbox grid layouts.</Text>
-                    <Text style={styles.listItem}>• Managed complex component state (useState) for dynamic form routing and interactive image modals.</Text>
+        <div className="bg-slate-800 border border-slate-700 rounded-xl p-6 md:p-8 shadow-lg space-y-6">
+          {/* Front-End */}
+          <div>
+            <h3 className="text-lg font-bold text-sky-400 mb-2">
+              Front-End UI & State Management
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-gray-300 text-sm md:text-base leading-relaxed">
+              <li>
+                Engineered a responsive, accessible interface using Next.js App Router, React Server Components, and Tailwind CSS.
+              </li>
+              <li>
+                Managed client-side interactive state for multi-step form routing, quick-select chips, and dynamic modal overlays.
+              </li>
+            </ul>
+          </div>
 
-                    <View style={{marginTop: 12}}></View>
-                    
-                    <Text style={styles.boldText}>Back-End Integration & Serverless API</Text>
-                    <Text style={styles.listItem}>• Engineered a serverless REST webhook using Google Apps Script to securely parse JSON POST payloads.</Text>
-                    <Text style={styles.listItem}>• Automated data pipelines by routing frontend React Native submissions directly into a live Google Sheets database.</Text>
+          <div className="border-t border-slate-700/80 pt-6">
+            {/* Back-End */}
+            <h3 className="text-lg font-bold text-sky-400 mb-2">
+              Back-End Integration & Serverless API
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-gray-300 text-sm md:text-base leading-relaxed">
+              <li>
+                Engineered serverless REST webhooks via Google Apps Script to securely parse incoming JSON POST payloads.
+              </li>
+              <li>
+                Automated asynchronous data pipelines routing intake submissions directly into live database sheets.
+              </li>
+            </ul>
+          </div>
 
-                    <View style={{marginTop: 15}}></View>
-                    <Text style={styles.boldText}>Cloud DevOps & IT Infrastructure</Text>
-                    <Text style={styles.listItem}>• Deployed a static web application to the cloud utilizing Microsoft Azure Static Web Apps.</Text>
-                    <Text style={styles.listItem}>• Configured DNS and SSL certificates for secure, reliable web hosting.</Text>
-                </View>
-            </View>
-        </View>
-    );
+          <div className="border-t border-slate-700/80 pt-6">
+            {/* Cloud & DevOps */}
+            <h3 className="text-lg font-bold text-sky-400 mb-2">
+              Cloud DevOps & IT Infrastructure
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-gray-300 text-sm md:text-base leading-relaxed">
+              <li>
+                Configured Microsoft Azure Static Web Apps deployment workflows using GitHub Actions CI/CD pipelines.
+              </li>
+              <li>
+                Provisioned custom DNS records, automated SSL certificate bindings, and static site export pipelines.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
-
-const styles = StyleSheet.create({
-    container: { width: '100%', maxWidth: 960, alignSelf: 'center', paddingHorizontal: 20 },
-    section: { paddingVertical: 40 },
-    sectionAlt: { backgroundColor: '#111827' },
-    h2: { fontSize: 26, fontWeight: 'bold', color: '#e5e7eb', marginBottom: 15 },
-    paragraph: { fontSize: 16, color: '#e5e7eb', lineHeight: 24, marginBottom: 15 }, 
-    card: { backgroundColor: '#1f2937', padding: 20, borderRadius: 10, borderWidth: 1, borderColor: '#374151', marginBottom: 20 },
-    listItem: { fontSize: 16, color: '#e5e7eb', marginBottom: 8 },
-    boldText: { fontSize: 16, fontWeight: 'bold', color: '#38bdf8', marginBottom: 5 },
- });
-
-

@@ -1,118 +1,146 @@
+'use client';
+
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 
 export default function Contact() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
-    const handleSubmit = async () => {
-        // 1. Regular Expression pattern for standard email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        // 2. Check if any fields are completely blank FIRST
-        if (!name || !email || !message) {
-            alert('Please fill out all fields before submitting.');
-            return; 
-        }
+    if (!name || !email || !message) {
+      alert('Please fill out all fields before submitting.');
+      return;
+    }
 
-        // 3. Test the email input against our RegEx pattern
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address (e.g., name@example.com).');
-            return; 
-        }
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address (e.g., name@example.com).');
+      return;
+    }
 
-        // 4. Send the data to your Google Sheets Webhook
-        try {
-            // We will paste your actual Google Apps Script URL here once we update it
-            const webhookUrl = 'https://script.google.com/macros/s/AKfycbxGV2v-xWkCCG1rZnp4-HHyzos0OmpAzxvF3XPiSQtJjp8pSBq_oJwaed80AvIT762lKw/exec';
-            
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'text/plain;charset=utf-8',
-                },
-                body: JSON.stringify({
-                    formType: 'Contact', // This tells Google Sheets which tab to put it in
-                    name: name,
-                    email: email,
-                    message: message,
-                    date: new Date().toLocaleString()
-                }),
-            });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
 
-            if (response.ok) {
-                alert('Message sent successfully! I will get back to you soon.');
-                // Clear the form out after a successful send
-                setName('');
-                setEmail('');
-                setMessage('');
-            } else {
-                alert('There was a problem sending your message. Please try again.');
-            }
-        } catch (error) {
-            alert('Network error. Please check your connection and try again.');
-        }
-    };
+    try {
+      const webhookUrl =
+        'https://script.google.com/macros/s/AKfycbxGV2v-xWkCCG1rZnp4-HHyzos0OmpAzxvF3XPiSQtJjp8pSBq_oJwaed80AvIT762lKw/exec';
 
-    return (
-        <View style={[styles.section, styles.sectionAlt]}>
-            <View style={styles.container}>
-                <Text style={styles.h2}>📬 Ask a Question</Text>
-                <Text style={styles.paragraph}>Have a general technology question or need advice? Send me a message below.</Text>
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify({
+          formType: 'Contact',
+          name,
+          email,
+          message,
+          date: new Date().toLocaleString(),
+        }),
+      });
 
-                <View style={styles.card}>
-                    <Text style={styles.label}>Name</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="John Doe"
-                        placeholderTextColor="#9ca3af"
-                        value={name}
-                        onChangeText={setName}
-                    />
+      if (response.ok) {
+        setSubmitStatus('Message sent successfully! I will get back to you soon.');
+        setName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        setSubmitStatus('There was a problem sending your message. Please try again.');
+      }
+    } catch (error) {
+      setSubmitStatus('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-                    <Text style={styles.label}>Email</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="john@example.com"
-                        placeholderTextColor="#9ca3af"
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                    />
+  return (
+    <section className="py-10">
+      <div className="w-full max-w-[700px] mx-auto px-5">
+        <h2 className="text-2xl font-bold text-gray-200 mb-2">
+          📬 Ask a Question
+        </h2>
+        <p className="text-base text-gray-300 leading-relaxed mb-6">
+          Have a general technology question or need advice? Send me a message below.
+        </p>
 
-                    <Text style={styles.label}>Message</Text>
-                    <TextInput
-                        style={[styles.input, styles.textArea]}
-                        placeholder="How can I help you?"
-                        placeholderTextColor="#9ca3af"
-                        value={message}
-                        onChangeText={setMessage}
-                        multiline={true}
-                        numberOfLines={4}
-                    />
+        <form
+          onSubmit={handleSubmit}
+          className="bg-slate-800 border border-slate-700 p-6 md:p-8 rounded-xl shadow-lg"
+        >
+          {/* Name Field */}
+          <div className="mb-5">
+            <label className="block text-sm font-semibold text-gray-200 mb-2">
+              Name *
+            </label>
+            <input
+              type="text"
+              required
+              placeholder="John Doe"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-sky-400 text-base"
+            />
+          </div>
 
-                    <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-                        {/* Fixed the typo here to match the styles below */}
-                        <Text style={styles.submitText}>Send Message</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </View>
-    );
+          {/* Email Field */}
+          <div className="mb-5">
+            <label className="block text-sm font-semibold text-gray-200 mb-2">
+              Email *
+            </label>
+            <input
+              type="email"
+              required
+              placeholder="john@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-sky-400 text-base"
+            />
+          </div>
+
+          {/* Message Field */}
+          <div className="mb-6">
+            <label className="block text-sm font-semibold text-gray-200 mb-2">
+              Message *
+            </label>
+            <textarea
+              required
+              rows={5}
+              placeholder="How can I help you?"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-sky-400 text-base resize-none"
+            />
+          </div>
+
+          {/* Status Message */}
+          {submitStatus && (
+            <div
+              className={`p-4 rounded-lg mb-5 text-sm font-semibold text-center ${
+                submitStatus.includes('successfully')
+                  ? 'bg-emerald-950/60 border border-emerald-500 text-emerald-300'
+                  : 'bg-red-950/60 border border-red-500 text-red-300'
+              }`}
+            >
+              {submitStatus}
+            </div>
+          )}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold py-3.5 px-6 rounded-full transition-colors disabled:opacity-50 text-base"
+          >
+            {isSubmitting ? 'Sending Message...' : 'Send Message'}
+          </button>
+        </form>
+      </div>
+    </section>
+  );
 }
-                
-const styles = StyleSheet.create({
-    container: { width: '100%', maxWidth: 700, alignSelf: 'center', paddingHorizontal: 20},
-    section: { paddingVertical: 40 },
-    sectionAlt: { backgroundColor: '#111827' },
-    h2: { fontSize: 26, fontWeight: 'bold', color: '#e5e7eb', marginBottom: 10 },
-    paragraph: { fontSize: 16, color: '#e5e7eb', lineHeight: 24, marginBottom: 20 },
-    card: { backgroundColor: '#1f2937', padding: 20, borderRadius: 10, borderWidth: 1, borderColor: '#374151' },
-    label: { color: '#e5e7eb', fontSize: 14, fontWeight: 'bold', marginBottom: 5, marginTop: 10 },
-    input: { backgroundColor: '#374151', color: '#f3f4f6', padding: 12, borderRadius: 8, fontSize: 16, borderWidth: 1, borderColor: '#4b5563' },
-    textArea: { height: 100, textAlignVertical: 'top' },
-    // Fixed the missing comma on this line!
-    submitButton: { backgroundColor: '#38bdf8', paddingVertical: 12, borderRadius: 8, marginTop: 20, alignItems: 'center' },
-    submitText: { color: '#0b1120', fontSize: 16, fontWeight: 'bold' }
-});

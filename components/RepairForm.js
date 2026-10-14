@@ -1,5 +1,6 @@
+'use client';
+
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 
 export default function RepairForm() {
   const [name, setName] = useState('');
@@ -15,19 +16,21 @@ export default function RepairForm() {
     { label: '📱 Phone', value: 'Phone' },
     { label: '💻 Tablet', value: 'Tablet' },
     { label: '🖥️ Computer', value: 'Computer' },
-    { label: '⚡ Other Electronics', value: 'Other Electronics' }
+    { label: '⚡ Other Electronics', value: 'Other Electronics' },
   ];
 
   const presetModels = {
     Phone: ['iPhone 17 Pro Max', 'iPhone 16 Pro', 'Galaxy S Series'],
     Tablet: ['13-inch iPad Pro', 'iPad Air', 'Galaxy Tab'],
     Computer: ['MacBook Pro', 'Dell Latitude', 'Custom Windows PC'],
-    'Other Electronics': ['Trek E-Bike Battery', 'DVR Security System', 'J-Tech HDMI Extender']
+    'Other Electronics': ['Trek E-Bike Battery', 'DVR Security System', 'J-Tech HDMI Extender'],
   };
 
-  const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwLSk2w_Z2GEfo4kWzUmTg3HyLKvZLBKRf2Nj-XYIEoy4mGlQK2awAg73Hn8-bMujg4/exec';
+  const WEBHOOK_URL =
+    'https://script.google.com/macros/s/AKfycbwLSk2w_Z2GEfo4kWzUmTg3HyLKvZLBKRf2Nj-XYIEoy4mGlQK2awAg73Hn8-bMujg4/exec';
 
-  const submitForm = async () => {
+  const submitForm = async (e) => {
+    e.preventDefault();
     if (!name || !email || !deviceModel || !message) {
       alert('Please fill out your Name, Email, Device Model, and Message.');
       return;
@@ -41,9 +44,21 @@ export default function RepairForm() {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ticketId, name, email, phone, deviceCategory, deviceModel, message })
+        body: JSON.stringify({
+          ticketId,
+          name,
+          email,
+          phone,
+          deviceCategory,
+          deviceModel,
+          message,
+        }),
       });
-      setName(''); setEmail(''); setPhone(''); setDeviceModel(''); setMessage('');
+      setName('');
+      setEmail('');
+      setPhone('');
+      setDeviceModel('');
+      setMessage('');
       setSubmitStatus(`Success! Service Ticket #${ticketId} created.`);
     } catch (error) {
       setSubmitStatus('Oops! Something went wrong. Please email me directly instead.');
@@ -53,72 +68,143 @@ export default function RepairForm() {
   };
 
   return (
-    <View style={styles.section}>
-      <View style={styles.container}>
-        <Text style={styles.h2}>📝 Request a Repair Quote</Text>
-        <Text style={styles.paragraph}>Select your device category, choose or type your model, and describe your issue below.</Text>
-        
-        <View style={styles.formCard}>
-          <Text style={styles.inputLabel}>Name *</Text>
-          <TextInput style={styles.inputField} placeholder="John Doe" placeholderTextColor="#6b7280" value={name} onChangeText={setName} />
+    <section className="py-10">
+      <div className="w-full max-w-[760px] mx-auto px-5">
+        <h2 className="text-2xl font-bold text-gray-200 mb-2">
+          📝 Request a Repair Quote
+        </h2>
+        <p className="text-base text-gray-300 leading-relaxed mb-6">
+          Select your device category, choose or type your model, and describe your issue below.
+        </p>
 
-          <Text style={styles.inputLabel}>Email *</Text>
-          <TextInput style={styles.inputField} placeholder="john@example.com" placeholderTextColor="#6b7280" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} />
+        <form onSubmit={submitForm} className="bg-slate-800 border border-slate-700 p-6 md:p-8 rounded-xl shadow-lg">
+          {/* Name Field */}
+          <div className="mb-5">
+            <label className="block text-sm font-semibold text-gray-200 mb-2">Name *</label>
+            <input
+              type="text"
+              required
+              placeholder="John Doe"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-sky-400 text-base"
+            />
+          </div>
 
-          <Text style={styles.inputLabel}>Device Category *</Text>
-          <View style={styles.categoryGrid}>
-            {categories.map((cat) => (
-              <TouchableOpacity key={cat.value} style={[styles.categoryButton, deviceCategory === cat.value && styles.selectedCategory]} onPress={() => { setDeviceCategory(cat.value); setDeviceModel(''); }}>
-                <Text style={[styles.categoryText, deviceCategory === cat.value && styles.selectedCategoryText]}>{cat.label}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          {/* Email Field */}
+          <div className="mb-5">
+            <label className="block text-sm font-semibold text-gray-200 mb-2">Email *</label>
+            <input
+              type="email"
+              required
+              placeholder="john@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-sky-400 text-base"
+            />
+          </div>
 
-          <Text style={styles.inputLabel}>Quick Select Model or Type Below *</Text>
-          <View style={styles.presetContainer}>
-            {presetModels[deviceCategory].map((model) => (
-              <TouchableOpacity key={model} style={[styles.presetChip, deviceModel === model && styles.selectedPresetChip]} onPress={() => setDeviceModel(model)}>
-                <Text style={[styles.presetText, deviceModel === model && styles.selectedPresetText]}>{model}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          {/* Phone Field */}
+          <div className="mb-5">
+            <label className="block text-sm font-semibold text-gray-200 mb-2">Phone (Optional)</label>
+            <input
+              type="tel"
+              placeholder="(501) 555-0123"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-sky-400 text-base"
+            />
+          </div>
 
-          <TextInput style={styles.inputField} placeholder="e.g., iPhone 17 Pro Max..." placeholderTextColor="#6b7280" value={deviceModel} onChangeText={setDeviceModel} />
-          
-          <Text style={styles.inputLabel}>Describe the Issue *</Text>
-          <TextInput style={[styles.inputField, {height: 100}]} placeholder="Tell me about your issue..." placeholderTextColor="#6b7280" multiline={true} textAlignVertical="top" value={message} onChangeText={setMessage} />
+          {/* Category Selector */}
+          <div className="mb-5">
+            <label className="block text-sm font-semibold text-gray-200 mb-2">Device Category *</label>
+            <div className="grid grid-cols-2 gap-3">
+              {categories.map((cat) => (
+                <button
+                  type="button"
+                  key={cat.value}
+                  onClick={() => {
+                    setDeviceCategory(cat.value);
+                    setDeviceModel('');
+                  }}
+                  className={`py-3 px-4 rounded-lg border text-sm font-medium transition-colors ${
+                    deviceCategory === cat.value
+                      ? 'bg-sky-400 text-slate-950 border-sky-400 font-bold'
+                      : 'bg-slate-900 text-gray-400 border-slate-700 hover:border-slate-500'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          </div>
 
-          {submitStatus ? <Text style={submitStatus.includes('Oops') ? styles.errorText : styles.successText}>{submitStatus}</Text> : null}
+          {/* Preset Chips */}
+          <div className="mb-3">
+            <label className="block text-sm font-semibold text-gray-200 mb-2">Quick Select Model or Type Below *</label>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {presetModels[deviceCategory].map((model) => (
+                <button
+                  type="button"
+                  key={model}
+                  onClick={() => setDeviceModel(model)}
+                  className={`px-3 py-1.5 rounded-full text-xs transition-colors border ${
+                    deviceModel === model
+                      ? 'bg-sky-500 text-slate-950 font-bold border-sky-500'
+                      : 'bg-slate-900 text-gray-400 border-slate-700 hover:border-slate-500'
+                  }`}
+                >
+                  {model}
+                </button>
+              ))}
+            </div>
+            <input
+              type="text"
+              required
+              placeholder="e.g., iPhone 17 Pro Max..."
+              value={deviceModel}
+              onChange={(e) => setDeviceModel(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-sky-400 text-base"
+            />
+          </div>
 
-          <TouchableOpacity style={[styles.btnPrimary, {marginTop: 10}]} onPress={submitForm} disabled={isSubmitting}>
-            {isSubmitting ? <ActivityIndicator color="#0b1120" /> : <Text style={styles.btnText}>Generate Repair Ticket</Text>}
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
+          {/* Issue Description */}
+          <div className="mb-6">
+            <label className="block text-sm font-semibold text-gray-200 mb-2">Describe the Issue *</label>
+            <textarea
+              required
+              rows={4}
+              placeholder="Tell me about the issue..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-sky-400 text-base resize-none"
+            />
+          </div>
+
+          {/* Status Alert */}
+          {submitStatus && (
+            <div
+              className={`p-4 rounded-lg mb-5 text-sm font-semibold text-center ${
+                submitStatus.includes('Oops')
+                  ? 'bg-red-950/60 border border-red-500 text-red-300'
+                  : 'bg-emerald-950/60 border border-emerald-500 text-emerald-300'
+              }`}
+            >
+              {submitStatus}
+            </div>
+          )}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold py-3.5 px-6 rounded-full transition-colors disabled:opacity-50 text-base"
+          >
+            {isSubmitting ? 'Submitting Ticket...' : 'Generate Repair Ticket'}
+          </button>
+        </form>
+      </div>
+    </section>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { width: '100%', maxWidth: 960, alignSelf: 'center', paddingHorizontal: 20 },
-  section: { paddingVertical: 40 },
-  h2: { fontSize: 26, fontWeight: 'bold', color: '#e5e7eb', marginBottom: 15 },
-  paragraph: { fontSize: 16, color: '#e5e7eb', lineHeight: 24, marginBottom: 15 },
-  formCard: { backgroundColor: '#1e293b', padding: 25, borderRadius: 12, borderWidth: 1, borderColor: '#334155' },
-  inputLabel: { color: '#e2e8f0', fontSize: 14, fontWeight: '600', marginBottom: 6 },
-  inputField: { backgroundColor: '#0f172a', color: '#f8fafc', borderWidth: 1, borderColor: '#334155', borderRadius: 8, padding: 12, fontSize: 16, marginBottom: 20 },
-  categoryGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: 15 },
-  categoryButton: { width: '48%', padding: 12, borderWidth: 1, borderColor: '#334155', borderRadius: 8, marginBottom: 10, alignItems: 'center', backgroundColor: '#0f172a' },
-  selectedCategory: { backgroundColor: '#38bdf8', borderColor: '#38bdf8' },
-  categoryText: { color: '#9ca3af', fontWeight: '500' },
-  selectedCategoryText: { color: '#0b1120', fontWeight: 'bold' },
-  presetContainer: { flexDirection: 'row', flexWrap: 'wrap', marginBottom: 10 },
-  presetChip: { backgroundColor: '#0f172a', borderWidth: 1, borderColor: '#334155', paddingVertical: 6, paddingHorizontal: 12, borderRadius: 15, marginRight: 8, marginBottom: 8 },
-  selectedPresetChip: { backgroundColor: '#0ea5e9', borderColor: '#0ea5e9' },
-  presetText: { color: '#9ca3af', fontSize: 13 },
-  selectedPresetText: { color: '#0b1120', fontWeight: 'bold' },
-  successText: { color: '#4ade80', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
-  errorText: { color: '#f87171', fontSize: 15, marginBottom: 15, textAlign: 'center', fontWeight: 'bold' },
-  btnPrimary: { backgroundColor: '#38bdf8', paddingVertical: 12, paddingHorizontal: 24, borderRadius: 30, alignSelf: 'center', width: '100%', alignItems: 'center' },
-  btnText: { color: '#0b1120', fontWeight: 'bold', fontSize: 16 }
-});
