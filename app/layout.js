@@ -37,7 +37,7 @@ export const metadata = {
     index: true,
     follow: true,
   },
-};
+}
 
 export default function RootLayout({ children }) {
   // Structured Schema data so Google understands your entity profile and location
@@ -89,4 +89,4 @@ export default function RootLayout({ children }) {
       </body>
     </html>
   );
-}
+} 

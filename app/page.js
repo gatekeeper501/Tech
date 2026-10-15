@@ -1,9 +1,10 @@
 import Gallery from '../components/Gallery';
+import AboutStory from '../components/AboutStory';
 
 export default function HomePage() {
   return (
     <div className="flex flex-col">
-      {/* About Section */}
+      {/* About Overview */}
       <section className="py-10 border-b border-slate-800">
         <div className="w-full max-w-[960px] mx-auto px-5">
           <h2 className="text-2xl font-bold text-gray-200 mb-4">
@@ -15,28 +16,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Gallery Showcase */}
+      {/* Workbench Showcase */}
       <Gallery />
 
-      {/* Education & Background Section */}
-      <section className="py-10 bg-slate-950/40 border-t border-slate-800">
-        <div className="w-full max-w-[960px] mx-auto px-5">
-          <h2 className="text-2xl font-bold text-gray-200 mb-4">
-            🎓 Education & Technical Credentials
-          </h2>
-          <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-6">
-            <h3 className="text-lg font-bold text-sky-400 mb-1">
-              Associate of Science in Computer Information Systems
-            </h3>
-            <p className="text-gray-400 text-sm mb-3">
-              University of Arkansas System • Continued Studies in Computer Science (UALR)
-            </p>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Academic coursework focused on database administration, systems analysis, object-oriented programming, and network infrastructure.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* My Story, Education, Credentials & Coursework */}
+      <AboutStory />
 
       {/* Core Competencies Grid */}
       <section className="py-10 border-t border-slate-800">
