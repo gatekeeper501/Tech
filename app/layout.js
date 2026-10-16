@@ -5,17 +5,20 @@ import Header from '../components/Header';
 export const metadata = {
   metadataBase: new URL('https://www.techbycornelius.com'),
   title: {
-    default: 'Tech by Cornelius | IT Professional & Developer | Central Arkansas',
+    default: 'Cornell Cornelius Jr. | IT Support, Web Development & Computer Repair Central Arkansas',
     template: '%s | Tech by Cornelius',
   },
   description:
-    'Cornell Cornelius Jr. provides expert IT support, electronics hardware repair, and cloud web development across Central Arkansas. Certified CompTIA A+, Microsoft Azure Fundamentals, and Apple Teacher.',
+    'Cornell Cornelius Jr. provides professional IT support, electronics and computer repair, and modern web development across Central Arkansas, Little Rock, and Benton. CompTIA A+, Microsoft Azure Fundamentals, Apple Teacher.',
   keywords: [
-    'Tech by Cornelius',
+    'Cornell Cornelius',
     'Cornell Cornelius Jr',
-    'IT Professional Arkansas',
+    'Tech by Cornelius',
+    'IT Support Arkansas',
+    'Computer Repair Little Rock',
     'Electronics Repair Benton AR',
     'Hardware Diagnostics Little Rock',
+    'Microsoft 365 Support Arkansas',
     'Next.js Developer Arkansas',
     'CompTIA A+ Certified Technician',
   ],
@@ -25,9 +28,9 @@ export const metadata = {
     canonical: 'https://www.techbycornelius.com',
   },
   openGraph: {
-    title: 'Tech by Cornelius | IT Professional & Developer',
+    title: 'Cornell Cornelius Jr. | Tech by Cornelius',
     description:
-      'Bridging the gap between hardware diagnostics and cloud-based software development in Central Arkansas.',
+      'Professional IT support, hardware diagnostics, and cloud software development across Central Arkansas.',
     url: 'https://www.techbycornelius.com',
     siteName: 'Tech by Cornelius',
     locale: 'en_US',
@@ -37,14 +40,14 @@ export const metadata = {
     index: true,
     follow: true,
   },
-}
+};
 
 export default function RootLayout({ children }) {
-  // Structured Schema data so Google understands your entity profile and location
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Tech by Cornelius',
+    alternateName: 'Cornell Cornelius Jr. IT Services',
     image: 'https://www.techbycornelius.com/assets/IMG_5717.jpg',
     url: 'https://www.techbycornelius.com',
     telephone: '',
@@ -54,10 +57,17 @@ export default function RootLayout({ children }) {
       addressRegion: 'AR',
       addressCountry: 'US',
     },
+    areaServed: [
+      { '@type': 'AdministrativeArea', name: 'Central Arkansas' },
+      { '@type': 'City', name: 'Little Rock' },
+      { '@type': 'City', name: 'North Little Rock' },
+      { '@type': 'City', name: 'Benton' },
+      { '@type': 'City', name: 'Bryant' },
+    ],
     founder: {
       '@type': 'Person',
       name: 'Cornell Cornelius Jr.',
-      jobTitle: 'IT Specialist & Full-Stack Developer',
+      jobTitle: 'IT Specialist & Web Developer',
       alumniOf: [
         'UA - Pulaski Technical College',
         'University of Arkansas, Fayetteville',
@@ -84,9 +94,9 @@ export default function RootLayout({ children }) {
         <Header />
         <main className="flex-1">{children}</main>
         <footer className="py-8 border-t border-slate-700 text-center text-sm text-gray-400">
-          © 2026 Cornell Cornelius Jr. — Benton, Arkansas.
+          © 2026 Cornell Cornelius Jr. — Tech by Cornelius. Serving Central Arkansas.
         </footer>
       </body>
     </html>
   );
-} 
+}

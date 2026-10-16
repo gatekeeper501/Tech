@@ -6,10 +6,10 @@ export default function Header() {
           Cornell Cornelius Jr.
         </h1>
         <p className="text-xl text-sky-400 mb-2">
-          IT Professional | Developer | Tech Repair Specialist
+          IT Support | Computer Repair | Web Development
         </p>
-        <p className="text-base text-gray-400 mb-6">
-          Bridging the gap between hardware diagnostics and cloud-based software development.
+        <p className="text-base text-gray-400 mb-6 max-w-2xl mx-auto">
+          Delivering diagnostics, hardware repair, and cloud web development throughout Central Arkansas, including Little Rock, Benton, and surrounding communities.
         </p>
       </div>
     </header>

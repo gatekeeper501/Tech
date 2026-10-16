@@ -1,8 +1,8 @@
 import Contact from '../../components/Contact';
 
 export const metadata = {
-  title: 'Ask a Question | Tech by Cornelius',
-  description: 'Submit an inquiry or general tech consultation request to Cornell Cornelius Jr.',
+  title: 'Contact Cornell Cornelius Jr. | IT Support & Inquiries',
+  description: 'Get in touch with Cornell Cornelius Jr. for IT troubleshooting, custom website engineering, or hardware diagnostic requests in Central Arkansas.',
 };
 
 export default function ContactPage() {
