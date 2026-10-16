@@ -9,7 +9,7 @@ export default function AboutStory() {
         {/* Narrative Intro Card */}
         <div className="bg-slate-800 border border-slate-700 rounded-xl p-6 md:p-8 mb-8 space-y-4 text-gray-300 leading-relaxed text-base">
           <p>
-            I’m Cornell Cornelius Jr., an IT professional and developer serving Central Arkansas. My path in technology brings together formal college study and hands-on work with computers, software, and web applications.
+            I&apos;m Cornell Cornelius Jr., an IT professional and developer serving Central Arkansas. My path in technology brings together formal college study and hands-on work with computers, software, and web applications.
           </p>
           <p>
             At Pulaski Technical College, now UA - Pulaski Technical College, I earned an Associate of Applied Science in Computer Information Systems in 2009 and an Associate of General Studies in 2011, along with college certificates in computer information systems and general studies.
@@ -30,7 +30,7 @@ export default function AboutStory() {
           {/* Professional Certifications */}
           <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-6">
             <h3 id="certifications-title" className="text-lg font-bold text-sky-400 mb-4">
-              🏅 Professional Certifications & Recognition
+              🏅 Professional Certifications &amp; Recognition
             </h3>
             <ul className="space-y-3 text-sm text-gray-300">
               <li className="flex flex-col">
@@ -51,7 +51,7 @@ export default function AboutStory() {
           {/* Education & College Credentials */}
           <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-6">
             <h3 id="education-title" className="text-lg font-bold text-sky-400 mb-1">
-              🎓 Education & College Credentials
+              🎓 Education &amp; College Credentials
             </h3>
             <p className="text-xs text-gray-400 mb-4">
               Awarded by UA - Pulaski Technical College (formerly Pulaski Technical College)
@@ -92,9 +92,9 @@ export default function AboutStory() {
 
           <dl className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-slate-900/60 border border-slate-700/60 rounded-lg p-4">
-              <dt className="text-sm font-bold text-sky-300 mb-1">Programming & Software</dt>
+              <dt className="text-sm font-bold text-sky-300 mb-1">Programming &amp; Software</dt>
               <dd className="text-xs md:text-sm text-gray-300 leading-relaxed">
-                Programming Foundations I & II, Visual Basic.NET, Programming Paradigms, and Software Engineering.
+                Programming Foundations I &amp; II, Visual Basic.NET, Programming Paradigms, and Software Engineering.
               </dd>
             </div>
 
@@ -106,16 +106,16 @@ export default function AboutStory() {
             </div>
 
             <div className="bg-slate-900/60 border border-slate-700/60 rounded-lg p-4">
-              <dt className="text-sm font-bold text-sky-300 mb-1">Networking & IT</dt>
+              <dt className="text-sm font-bold text-sky-300 mb-1">Networking &amp; IT</dt>
               <dd className="text-xs md:text-sm text-gray-300 leading-relaxed">
-                Local Area Networks, Computer Networks, and IT Essentials I & II.
+                Local Area Networks, Computer Networks, and IT Essentials I &amp; II.
               </dd>
             </div>
 
             <div className="bg-slate-900/60 border border-slate-700/60 rounded-lg p-4">
               <dt className="text-sm font-bold text-sky-300 mb-1">Web Technologies</dt>
               <dd className="text-xs md:text-sm text-gray-300 leading-relaxed">
-                Internet Technologies, Advanced Web Page Design and Languages, and Website Administration & Security.
+                Internet Technologies, Advanced Web Page Design and Languages, and Website Administration &amp; Security.
               </dd>
             </div>
 
@@ -127,7 +127,7 @@ export default function AboutStory() {
             </div>
 
             <div className="bg-slate-900/60 border border-slate-700/60 rounded-lg p-4">
-              <dt className="text-sm font-bold text-sky-300 mb-1">Mathematics & Statistics</dt>
+              <dt className="text-sm font-bold text-sky-300 mb-1">Mathematics &amp; Statistics</dt>
               <dd className="text-xs md:text-sm text-gray-300 leading-relaxed">
                 Calculus I, II, and III; Discrete Mathematics; and Introduction to Statistical Methods.
               </dd>
