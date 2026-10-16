@@ -58,12 +58,16 @@ export default function AboutStory() {
             </p>
             <ul className="space-y-2 text-sm text-gray-300">
               <li className="flex justify-between border-b border-slate-700/60 pb-1.5">
+                <span>Associate of General Studies</span>
+                <span className="text-sky-400 font-mono text-xs">2011</span>
+              </li>
+              <li className="flex justify-between border-b border-slate-700/60 pb-1.5">
                 <span>Associate of Applied Science (CIS)</span>
                 <span className="text-sky-400 font-mono text-xs">2009</span>
               </li>
-              <li className="flex justify-between border-b border-slate-700/60 pb-1.5">
-                <span>Associate of General Studies</span>
-                <span className="text-sky-400 font-mono text-xs">2011</span>
+              <li className="flex justify-between">
+                <span>Certificate of General Studies</span>
+                <span className="text-sky-400 font-mono text-xs">2009</span>
               </li>
               <li className="flex justify-between border-b border-slate-700/60 pb-1.5">
                 <span>Technical Certificate (CIS)</span>
@@ -72,10 +76,6 @@ export default function AboutStory() {
               <li className="flex justify-between border-b border-slate-700/60 pb-1.5">
                 <span>Certificate of Proficiency (CIS)</span>
                 <span className="text-sky-400 font-mono text-xs">2008</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Certificate of General Studies</span>
-                <span className="text-sky-400 font-mono text-xs">2009</span>
               </li>
             </ul>
           </div>
