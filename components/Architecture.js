@@ -64,6 +64,58 @@ export default function Architecture() {
           </p>
         </div>
 
+        {/* --- NEW: Cloud Architecture Diagram & Case Study --- */}
+        <div className="mb-14 bg-slate-900/50 border border-slate-700 rounded-xl p-6 md:p-8">
+          <h3 className="text-xl font-bold text-sky-400 mb-6">Case Study: Cloud Hosting &amp; CI/CD Automation</h3>
+          
+          {/* Visual Diagram */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-center mb-8 bg-slate-950/50 p-6 rounded-lg border border-slate-800">
+            <div className="w-full md:w-1/4">
+              <div className="text-3xl mb-2">💻</div>
+              <div className="font-bold text-gray-200 text-sm">Next.js Source</div>
+              <div className="text-xs text-gray-500">React App Router</div>
+            </div>
+            <div className="text-sky-500 font-bold hidden md:block">→</div>
+            <div className="text-sky-500 font-bold md:hidden">↓</div>
+            
+            <div className="w-full md:w-1/4">
+              <div className="text-3xl mb-2">🐙</div>
+              <div className="font-bold text-gray-200 text-sm">GitHub Repo</div>
+              <div className="text-xs text-gray-500">Version Control</div>
+            </div>
+            <div className="text-sky-500 font-bold hidden md:block">→</div>
+            <div className="text-sky-500 font-bold md:hidden">↓</div>
+
+            <div className="w-full md:w-1/4">
+              <div className="text-3xl mb-2">⚙️</div>
+              <div className="font-bold text-gray-200 text-sm">GitHub Actions</div>
+              <div className="text-xs text-gray-500">CI/CD Pipeline</div>
+            </div>
+            <div className="text-sky-500 font-bold hidden md:block">→</div>
+            <div className="text-sky-500 font-bold md:hidden">↓</div>
+
+            <div className="w-full md:w-1/4 bg-slate-800 border-sky-500 border p-3 rounded-lg shadow-[0_0_15px_rgba(14,165,233,0.2)]">
+              <div className="text-3xl mb-2">☁️</div>
+              <div className="font-bold text-sky-300 text-sm">Azure Static Apps</div>
+              <div className="text-xs text-gray-400">Edge Network</div>
+            </div>
+          </div>
+
+          {/* Case Study Writeup */}
+          <div className="space-y-4 text-sm text-gray-300 leading-relaxed">
+            <p>
+              <strong className="text-gray-100">Objective:</strong> Architect a high-performance, secure web environment with zero manual deployment overhead and maximum search engine visibility.
+            </p>
+            <p>
+              <strong className="text-gray-100">Execution:</strong> I migrated the core application from an Expo React Native shell to a standard Next.js static export. To automate operations, I configured a GitHub Actions YAML workflow. Upon every code push, the pipeline provisions an Ubuntu runner, installs dependencies, compiles the React Server Components into static HTML, and securely authenticates with Microsoft Azure using a deployment token. Azure Static Web Apps then distributes the pre-rendered artifacts across its global edge network.
+            </p>
+            <p>
+              <strong className="text-gray-100">Outcome:</strong> A 100% automated CI/CD pipeline that eliminates server cold starts, neutralizes backend vulnerability vectors, and scores highly on Core Web Vitals for local SEO targeting.
+            </p>
+          </div>
+        </div>
+        {/* --- END NEW --- */}
+
         {/* Engineering Pillars Grid */}
         <div className="space-y-8">
           {domains.map((item, idx) => (
@@ -103,25 +155,6 @@ export default function Architecture() {
             </div>
           ))}
         </div>
-
-        {/* Applied Engineering Verification Bar */}
-        <div className="mt-10 p-5 rounded-xl bg-slate-900/80 border border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div>
-            <p className="text-sm font-semibold text-gray-200">
-              Need custom physical infrastructure or device diagnostics?
-            </p>
-            <p className="text-xs text-gray-400 mt-0.5">
-              Available for IT field services, low-voltage wiring, and component repairs in Central Arkansas.
-            </p>
-          </div>
-          <a
-            href="/contact"
-            className="shrink-0 px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold rounded-lg transition-colors"
-          >
-            Schedule Consultation
-          </a>
-        </div>
-
       </div>
     </section>
   );

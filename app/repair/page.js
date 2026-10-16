@@ -1,4 +1,5 @@
 import RepairForm from '../../components/RepairForm';
+import SupportMethodology from '../../components/SupportMethodology';
 
 export const metadata = {
   title: 'Computer & Device Repair Services | Little Rock & Central Arkansas',
@@ -6,5 +7,13 @@ export const metadata = {
 };
 
 export default function RepairPage() {
-  return <RepairForm />;
+  return (
+    <div className="flex flex-col">
+      {/* 1. The original repair intake form */}
+      <RepairForm />
+      
+      {/* 2. The newly mounted troubleshooting methodology and case study */}
+      <SupportMethodology />
+    </div>
+  );
 }
